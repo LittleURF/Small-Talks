@@ -8,6 +8,11 @@ using SmallTalks.Models;
 
 namespace SmallTalks.Controllers
 {
+    /*
+     * Registration View, including the Birth Date field which im not sure how to do
+     * 
+     * 
+    */
     public class HomeController : Controller
     {
         public IActionResult Index()

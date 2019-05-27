@@ -44,7 +44,7 @@ namespace SmallTalks.Data
                     UserName = "LittleURF",
                     Email = "hubertzachlowski@gmail.com",
                     BirthDate = new DateTime(1998, 07, 25),
-                    Sex = Sex.Male.ToString(),
+                    Sex = Sex.Male,
                     Points = 999999
                 };
 
@@ -65,7 +65,7 @@ namespace SmallTalks.Data
                     UserName = "TheFrogGirl",
                     Email = "hubertzachlo@o2.pl",
                     BirthDate = new DateTime(2005, 11, 04),
-                    Sex = Sex.Female.ToString(),
+                    Sex = Sex.Female,
                     Points = 200
                 };
 

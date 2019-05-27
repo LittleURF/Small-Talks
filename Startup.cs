@@ -13,6 +13,8 @@ using SmallTalks.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmallTalks.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SmallTalks.Services;
 
 namespace SmallTalks
 {
@@ -52,6 +54,8 @@ namespace SmallTalks
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
