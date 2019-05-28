@@ -18,7 +18,9 @@ namespace SmallTalks.Data
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<PostTags> PostTags { get; set; }
+        public DbSet<Report> Reports { get; set; }
         public DbSet<Ban> Bans { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

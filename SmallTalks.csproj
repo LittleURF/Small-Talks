@@ -20,6 +20,8 @@
     <Compile Remove="Data\Migrations\20190527235856_BanModelFinalFix.Designer.cs" />
     <Compile Remove="Data\Migrations\20190528150459_Post+Tag+PostTagModels.cs" />
     <Compile Remove="Data\Migrations\20190528150459_Post+Tag+PostTagModels.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190528155153_Comments+ReportsModels.cs" />
+    <Compile Remove="Data\Migrations\20190528155153_Comments+ReportsModels.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
