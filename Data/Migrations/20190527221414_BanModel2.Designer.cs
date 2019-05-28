@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmallTalks.Data;
 
 namespace SmallTalks.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190527221414_BanModel2")]
+    partial class BanModel2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,65 +206,13 @@ namespace SmallTalks.Data.Migrations
 
                     b.Property<DateTime>("EndTime");
 
-                    b.Property<bool?>("IsActive");
-
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
                     b.ToTable("Bans");
-                });
-
-            modelBuilder.Entity("SmallTalks.Models.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .IsRequired();
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<string>("CreatorId")
-                        .IsRequired();
-
-                    b.Property<string>("Title")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("SmallTalks.Models.PostTags", b =>
-                {
-                    b.Property<int>("PostId");
-
-                    b.Property<int>("TagId");
-
-                    b.HasKey("PostId", "TagId");
-
-                    b.ToTable("PostTags");
-                });
-
-            modelBuilder.Entity("SmallTalks.Models.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

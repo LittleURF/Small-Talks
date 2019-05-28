@@ -6,6 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20190527214439_BanModel2.cs" />
+    <Compile Remove="Data\Migrations\20190527214439_BanModel2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190527215248_BanModel3.cs" />
+    <Compile Remove="Data\Migrations\20190527215248_BanModel3.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190527220444_BanModel4.cs" />
+    <Compile Remove="Data\Migrations\20190527220444_BanModel4.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190527220743_BanModel5.cs" />
+    <Compile Remove="Data\Migrations\20190527220743_BanModel5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190527220821_BanModel6.cs" />
+    <Compile Remove="Data\Migrations\20190527220821_BanModel6.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190527235856_BanModelFinalFix.cs" />
+    <Compile Remove="Data\Migrations\20190527235856_BanModelFinalFix.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190528150459_Post+Tag+PostTagModels.cs" />
+    <Compile Remove="Data\Migrations\20190528150459_Post+Tag+PostTagModels.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
