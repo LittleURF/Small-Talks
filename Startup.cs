@@ -98,7 +98,7 @@ namespace SmallTalks
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(context, userManager, roleManager).Wait();
+            //DummyData.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }
