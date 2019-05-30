@@ -17,6 +17,10 @@ body {
     background: linear-gradient(to top, #00b4db, #0083b0);
 }
 
+
+p, .post__title {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 .full-width {
     width: 100vw;
     position: relative;
@@ -30,6 +34,32 @@ body {
     width: 200px;
     margin-left: 25px;
     display: none;
+}
+
+section.posts
+
+.post {
+    max-height: 220px;
+    width: calc(90%);
+    background-color: lightgray;
+    margin-bottom: 35px;
+    overflow: hidden;
+}
+
+.post__title {
+    padding: 4px 15px 5px 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.post__text {
+    height: 150px;
+    width: calc(90%);
+    padding: 3px 15px 10px 15px;
+    overflow: hidden;
+    position: relative;
+
 }
 @media only screen and (min-width: 768px){
     .header__logo {
