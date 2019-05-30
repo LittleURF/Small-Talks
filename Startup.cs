@@ -42,17 +42,24 @@ namespace SmallTalks
                     Configuration.GetConnectionString("DefaultConnection")));
 
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 7;
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;// TODO - change to true before going to production
             })
 
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);

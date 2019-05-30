@@ -22,6 +22,8 @@
     <Compile Remove="Data\Migrations\20190528150459_Post+Tag+PostTagModels.Designer.cs" />
     <Compile Remove="Data\Migrations\20190528155153_Comments+ReportsModels.cs" />
     <Compile Remove="Data\Migrations\20190528155153_Comments+ReportsModels.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190530132332_asd.cs" />
+    <Compile Remove="Data\Migrations\20190530132332_asd.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
