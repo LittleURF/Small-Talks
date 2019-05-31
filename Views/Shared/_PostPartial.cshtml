@@ -1,0 +1,14 @@
+﻿@model SmallTalks.Models.Post
+
+<div class="row d-flex justify-content-center">
+    <div class="post">
+        <div class="post__data d-flex justify-content-between p-1 w-75 m-auto">
+            <p class="m-0">@Model.Creator.UserName</p>
+            <p class="m-0">@Model.CreationDate</p>
+        </div>
+        <div>
+            <h1 class="post__title">@Model.Title</h1>
+            <p class="post__text">@Model.Content</p>
+        </div>
+    </div>
+</div>

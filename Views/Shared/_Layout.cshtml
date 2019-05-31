@@ -30,6 +30,14 @@
                     <li class="nav-item"><a class="nav-link " asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link " asp-controller="Home" asp-action="Index">Profile</a></li>
                     <li class="nav-item"><a class="nav-link " asp-controller="Home" asp-action="Index">Instructions</a></li>
+                    @if (User.IsInRole("Moderator"))
+                    {
+                        <li class="nav-item"><a class="nav-link " asp-controller="Home" asp-action="Index">Moderator</a></li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item"><a class="nav-link " asp-controller="Home" asp-action="Index">Admin</a></li>
+                    }
                 </ul>
 
             </div>

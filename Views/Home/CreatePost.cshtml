@@ -1,0 +1,49 @@
+﻿@model SmallTalks.ViewModels.PostWithTags
+
+@{
+    ViewData["Title"] = "CreatePost";
+}
+
+<h2 class="text-center">Create a post</h2>
+<br />
+<div class="row">
+    <div class="col-md-8 m-auto">
+        <form asp-action="CreatePost">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Post.Title" placeholder="Title" class="form-control" />
+                <span asp-validation-for="Post.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <textarea asp-for="Post.Content" placeholder="Content - What do you wanna say?" class="create-post__textarea form-control"></textarea>
+                <span asp-validation-for="Post.Content" class="text-danger"></span>
+            </div>
+            <h4 class="text-center">Tags</h4>
+            <div class="d-flex flex-wrap">
+
+                @for (int i = 0; i < Model.Tags.Count(); i++)
+                {
+                    <div class=" col-4 form-group">
+                        <input asp-for="@Model.Tags[i].Id" type="hidden" class="form-check-input" />
+                        <input asp-for="@Model.Tags[i].IsActive" type="checkbox" class="form-check-input" />
+                        <label class="form-check-label">@Model.Tags[i].Name</label>
+                        <span asp-validation-for="@Model.Tags[i].IsActive" class="text-danger"></span>
+                    </div>
+                }
+
+            </div>
+            <br />
+            <div class="form-group text-center">
+                <input type="submit" value="Create" class="btn btn-lg btn-success btn-create" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index">Home</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

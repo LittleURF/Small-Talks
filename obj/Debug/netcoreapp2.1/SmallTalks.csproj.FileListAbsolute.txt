@@ -64,3 +64,5 @@ C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\AfterRegistration.g.cshtml.cs
+C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_PostPartial.g.cshtml.cs
+C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Views\Home\CreatePost.g.cshtml.cs
