@@ -16,5 +16,14 @@ namespace SmallTalks.Models
         public bool AccountLocked { get; set; }
         public int  CurrentBanId{ get; set; }
         public int Points { get; set; }
+
+        public int GetAge()
+        {
+            var today = DateTime.Today;
+            var age = today.Year - BirthDate.Year;
+            if (BirthDate.Date > today.AddYears(-age)) age--;
+
+            return age;
+        }
     }
 }

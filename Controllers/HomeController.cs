@@ -31,11 +31,29 @@ namespace SmallTalks.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var postsWithUsers = await _dbContext.Posts.Include(p => p.Creator).ToListAsync();
+            var posts = await _dbContext.Posts.Include(p => p.Creator).OrderByDescending(p => p.CreationDate).ToListAsync();
+            var tags = await _dbContext.Tags.ToListAsync();
 
+            foreach (var tag in tags)
+            {
+                tag.IsActive = true;
+            }
 
-            return View(postsWithUsers);
+            var model = new PostsWithTags { Posts = posts, Tags = tags };
+
+            return View(model);
         }
+
+        [ActionName("Index")]
+        [HttpPost]
+        public async Task<IActionResult> IndexByTags(PostsWithTags model)
+        {
+            var posts = await _dbContext.Posts.Include(p => p.Creator).OrderByDescending(p => p.CreationDate).ToListAsync();
+
+            return View(posts);
+        }
+
+
 
         [HttpGet]
         [Authorize]

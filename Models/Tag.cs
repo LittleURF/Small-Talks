@@ -15,6 +15,8 @@ namespace SmallTalks.Models
 
         public string Description { get; set; }
 
+        public string FaClasses { get; set; }
+
         [NotMapped]
         public bool IsActive { get; set; }
 

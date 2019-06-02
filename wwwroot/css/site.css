@@ -1,9 +1,16 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
+/* Gets rid of a scrollbar triggered by the tiny whitespace from .full-width class, in case the class is gone - Its a class that makes an element 100VW even if in a smaller container */
+html {
+    overflow-x: hidden
+}
+
 body {
     padding-bottom: 20px;
     min-height: 100vh;
-    background-image: linear-gradient(to right bottom, #ffffff, #fdfdfd, #fafafa, #f8f8f8, #f6f6f6);
+    background-color: lightgray;
+    background-image: url(../images/bgPattern.png)
+
 }
 
 /* Wrapping element */
@@ -11,16 +18,19 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+
 }
 
 .home__header-main {
     background: linear-gradient(to top, #00b4db, #0083b0);
+    text-align:center;
 }
 
 
 p, .post__title {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 .full-width {
     width: 100vw;
     position: relative;
@@ -36,27 +46,110 @@ p, .post__title {
     display: none;
 }
 
+.tags {
+    display: none !important;
+}
+
+.tag {
+    height: 45px;
+    font-family: 'Segoe UI Emoji', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.5px;
+    font-size: 100%;
+    line-height: 40px;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+}
+
+.tag input {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    -webkit-appearance: none;
+    top: 5px;
+    left: 12%;
+    background: #c6c6c6;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.2);
+    transition: .5s;
+    }
+
+.tag input:checked {
+    background: #03a9f4;
+}
+
+.tag input:checked .tag{
+    background: blue;
+}
+
+.tag input:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: .5s;
+}
+
+.tag input:checked:before {
+    left: 20px;
+}
+
+.tag__icon {
+    color: #03a9f4;
+    position: absolute;
+    left: 20%;
+    top: 11px;
+}
+
+.tags__btn {
+    border-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.post__wrapper:nth-child(even) .post {
+    background-color: #f8f8f8;
+}
+
 .post {
-    max-height: 220px;
     width: calc(90%);
-    background-color: lightgray;
+    background-color: #ffffff;
+    border: 1px solid #0083b0;
     margin-bottom: 35px;
     overflow: hidden;
 }
 
+.post__data, .comment__data {
+    font-size: 90%;
+}
+
 .post__title {
+    width: 95%;
     padding: 4px 15px 5px 15px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    position: relative;
+    left: 2%;
+    color: #0083b0;
+    font-weight: lighter;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    
 }
-.post__text {
-    height: 150px;
-    width: calc(90%);
+
+.post__text, .comment__text {
+    width: calc(95%);
     padding: 3px 15px 10px 15px;
     overflow: hidden;
     position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .create-post__textarea {
@@ -67,9 +160,37 @@ p, .post__title {
     width: 150px;
 }
 
+.add-comment__wrapper {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.add-comment__textarea {
+    height: 80px;
+}
+
+.comment {
+    width: calc(90%);
+    background-color: #c6c6c6;
+    border: 1px solid #c1c1c1;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+
 
 @media only screen and (min-width: 768px) {
     .header__logo {
         display: initial;
+    }
+
+    .tags__dropdown {
+        display: none !important;
+    }
+
+    .tags {
+        display: flex !important;
     }
 }

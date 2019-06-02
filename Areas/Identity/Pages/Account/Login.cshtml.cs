@@ -79,7 +79,6 @@ namespace SmallTalks.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
 
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
