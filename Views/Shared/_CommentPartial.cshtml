@@ -1,18 +1,20 @@
-﻿
+﻿@model SmallTalks.Models.Comment
+
 <div class="row d-flex justify-content-center">
     <div class="comment">
         <div class="comment__data d-flex justify-content-between p-1 w-75 m-auto">
             <!--  The expression of getting Sex is basically - getting the name of defined as int Sex enum. then displaying only first letter of the name, so F or M -->
-            <p class="m-0">Litt</p>
-            <p class="m-0">25.08</p>
+            <p class="m-0">@Model.Creator.UserName @Model.Creator.GetAge() @Enum.GetName(typeof(Sex), Model.Creator.Sex)[0]</p>
+            <p class="m-0" style=" word-spacing: 12px;">@Model.CreationDate.ToString("H:mm dd/MM/yyyy")</p>
             <i class="report-icon fas fa-exclamation-triangle"></i>
         </div>
         <div>
-            <p class="comment__text">asdasdasdasd</p>
+            <p class="comment__text">@Model.Content</p>
         </div>
+        <span data-toggle="collapse" data-target=".add-child-comment-@Model.Id" aria-expanded="false" aria-controls="add-child-comment">Reply</span>
         @* IF ANY CHILD COMMENTS EXIST.
             SWITCH @Model.Id for @Model.Comment.Id*@
-        @if (true)
+        @if (Model.Comments.Count() > 0 )
         {
             <div class="text-center">
                 <button class="btn btn-sm btn-secondary" type="button" data-toggle="collapse" data-target=".child-comments-@Model.Id" aria-expanded="false" aria-controls="child-comments">
@@ -20,13 +22,22 @@
                 </button>
             </div>
         }
+        <div class="collapse add-child-comment-@Model.Id">
+            <div class="add-comment__wrapper text-center">
+                <form asp-action="AddChildComment">
+                    <input asp-for="Id" type="hidden" name="CommentId"/>
+                    <input asp-for="PostId" type="hidden" />
+                    <textarea name="Content" placeholder="Your comment" class="add-comment__textarea form-control"></textarea>
+                    <input type="submit" class="btn" value="Add" />
+                </form>
+            </div>
+        </div>
         <div class="child-comments-@Model.Id collapse">
-            <partial name="_ChildCommentPartial" />
-            <partial name="_ChildCommentPartial" />
-            <partial name="_ChildCommentPartial" />
-            <partial name="_ChildCommentPartial" />
-            <partial name="_ChildCommentPartial" />
-            <partial name="_ChildCommentPartial" />
+            @foreach (var childComment in Model.Comments)
+            {
+                <partial name="_ChildCommentPartial" model="childComment"/>
+            }
+
         </div>
 
     </div>

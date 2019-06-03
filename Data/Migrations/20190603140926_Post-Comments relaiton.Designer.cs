@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmallTalks.Data;
 
 namespace SmallTalks.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190603140926_Post-Comments relaiton")]
+    partial class PostCommentsrelaiton
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,32 +218,6 @@ namespace SmallTalks.Data.Migrations
                     b.ToTable("Bans");
                 });
 
-            modelBuilder.Entity("SmallTalks.Models.ChildComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CommentId");
-
-                    b.Property<string>("Content")
-                        .IsRequired();
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<string>("CreatorId");
-
-                    b.Property<int>("PostId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("ChildComments");
-                });
-
             modelBuilder.Entity("SmallTalks.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -254,6 +230,10 @@ namespace SmallTalks.Data.Migrations
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<string>("CreatorId");
+
+                    b.Property<bool>("IsParentComment");
+
+                    b.Property<int?>("ParentCommentId");
 
                     b.Property<int>("PostId");
 
@@ -382,18 +362,6 @@ namespace SmallTalks.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SmallTalks.Models.ChildComment", b =>
-                {
-                    b.HasOne("SmallTalks.Models.Comment")
-                        .WithMany("Comments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmallTalks.Models.ApplicationUser", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorId");
                 });
 
             modelBuilder.Entity("SmallTalks.Models.Comment", b =>

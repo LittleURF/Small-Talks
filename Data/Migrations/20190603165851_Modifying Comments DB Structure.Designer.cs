@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmallTalks.Data;
 
 namespace SmallTalks.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190603165851_Modifying Comments DB Structure")]
+    partial class ModifyingCommentsDBStructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,7 +224,7 @@ namespace SmallTalks.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CommentId");
+                    b.Property<int?>("CommentId");
 
                     b.Property<string>("Content")
                         .IsRequired();
@@ -230,6 +232,8 @@ namespace SmallTalks.Data.Migrations
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<string>("CreatorId");
+
+                    b.Property<int>("ParentCommentId");
 
                     b.Property<int>("PostId");
 
@@ -388,8 +392,7 @@ namespace SmallTalks.Data.Migrations
                 {
                     b.HasOne("SmallTalks.Models.Comment")
                         .WithMany("Comments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CommentId");
 
                     b.HasOne("SmallTalks.Models.ApplicationUser", "Creator")
                         .WithMany()

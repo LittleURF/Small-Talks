@@ -20,5 +20,6 @@ namespace SmallTalks.Models
         [NotMapped]
         public bool IsActive { get; set; }
 
+        public List<PostTags> PostTags { get; set; }
     }
 }

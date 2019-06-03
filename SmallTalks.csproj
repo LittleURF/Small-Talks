@@ -24,6 +24,16 @@
     <Compile Remove="Data\Migrations\20190528155153_Comments+ReportsModels.Designer.cs" />
     <Compile Remove="Data\Migrations\20190530132332_asd.cs" />
     <Compile Remove="Data\Migrations\20190530132332_asd.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190603123643_Adding tags to post relation.cs" />
+    <Compile Remove="Data\Migrations\20190603123643_Adding tags to post relation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190603125520_Adding tags to post relation.cs" />
+    <Compile Remove="Data\Migrations\20190603125520_Adding tags to post relation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190603163606_Modifying Comments DB Structure.cs" />
+    <Compile Remove="Data\Migrations\20190603163606_Modifying Comments DB Structure.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190603165314_Modifying Comments DB Structure2.cs" />
+    <Compile Remove="Data\Migrations\20190603165314_Modifying Comments DB Structure2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190603174203_Sm.cs" />
+    <Compile Remove="Data\Migrations\20190603174203_Sm.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

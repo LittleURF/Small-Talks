@@ -107,6 +107,9 @@ p, .post__title {
 
 .tag__icon {
     color: #03a9f4;
+}
+
+.tag__icon-in-list {
     position: absolute;
     left: 20%;
     top: 11px;
@@ -157,6 +160,14 @@ p, .post__title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.post__tags {
+    margin-left: 15px;
+}
+
+.post__tag {
+    color: #0083b0;
+} 
+
 .create-post__textarea {
     height: 260px;
 }
@@ -183,7 +194,7 @@ p, .post__title {
 .comment {
     position: relative;
     width: calc(90%);
-    background-color: #e0e0e0;
+    background-color: #efeded;
     border: 1px solid #c1c1c1;
     margin-bottom: 5px;
     overflow: hidden;

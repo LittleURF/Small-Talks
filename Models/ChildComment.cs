@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmallTalks.Models
 {
-    public class Post
+    public class ChildComment
     {
         public int Id { get; set; }
 
@@ -15,14 +15,9 @@ namespace SmallTalks.Models
 
         public ApplicationUser Creator { get; set; }
 
-        public List<Comment> Comments { get; set; }
+        public int PostId { get; set; }
 
-
-        public List<PostTags> PostTags { get; set; }
-
-
-        [Required]
-        public string Title { get; set; }
+        public int CommentId { get; set; }
 
         [Required]
         public string Content { get; set; }

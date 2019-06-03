@@ -11,6 +11,13 @@
         <div>
             <h1 class="post__title">@Model.Title</h1>
             <p class="post__text">@Model.Content</p>
+            <div class="post__tags">
+                @foreach (var postTags in Model.PostTags)
+                {
+                    <i class="tag__icon post__tag @postTags.Tag.FaClasses"></i>
+
+                }
+            </div>
             <div class="text-center">
                 <button class="btn btn-dark" type="button" data-toggle="collapse" data-target=".comments-@Model.Id" aria-expanded="false" aria-controls="comments">
                     &dArr;
@@ -18,12 +25,18 @@
             </div>
             <div class="comments comments-@Model.Id">
                 @* add class collapse *@
-                <div class="add-comment__wrapper">
-                    <textarea placeholder="Your comment" class="add-comment__textarea form-control"></textarea>
-                    <a class="btn">Add</a>
+                <div class="add-comment__wrapper text-center">
+                    <form asp-action="AddComment">
+                        <input asp-for="Id" type="hidden" name="PostId" />
+                        <textarea name="Content" placeholder="Your comment" class="add-comment__textarea form-control"></textarea>
+                        <input type="submit" class="btn" value="Add" />
+                    </form>
                 </div>
-                <partial name="_CommentPartial" />
-                <partial name="_CommentPartial" />
+                @foreach (var comment in Model.Comments)
+                {
+                    <partial name="_CommentPartial" model="@comment" />
+                }
+
             </div>
         </div>
     </div>

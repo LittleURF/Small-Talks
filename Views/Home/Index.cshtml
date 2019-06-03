@@ -34,7 +34,7 @@
             <div class="tag dropdown-item text-center" style="position: relative;">
                 <input asp-for="@Model.Tags[i].Id" type="hidden" class="form-check-input" />
                 <input asp-for="@Model.Tags[i].IsActive" type="checkbox" class="form-check-input" />
-                <i class="tag__icon @Model.Tags[i].FaClasses"></i>
+                <i class="tag__icon tag__icon-in-list @Model.Tags[i].FaClasses"></i>
                 <label class="form-check-label">@Model.Tags[i].Name</label>
             </div>
         }
@@ -47,7 +47,7 @@
         <div class="tag col-lg-4 col-md-6">
             <input asp-for="@Model.Tags[i].Id" type="hidden" class="form-check-input" />
             <input asp-for="@Model.Tags[i].IsActive" type="checkbox" class="form-check-input" />
-            <i class="tag__icon @Model.Tags[i].FaClasses"></i>
+            <i class="tag__icon tag__icon-in-list @Model.Tags[i].FaClasses"></i>
             <label class="form-check-label">@Model.Tags[i].Name</label>
         </div>
         }
