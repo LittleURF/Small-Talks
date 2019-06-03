@@ -3,9 +3,10 @@
 <div class="post__wrapper row d-flex justify-content-center">
     <div class="post">
         <div class="post__data d-flex justify-content-between p-1 w-75 m-auto">
-             <!--  The expression of getting Sex is basically - getting the name of defined as int Sex enum. then displaying only first letter of the name, so F or M -->
+            <!--  The expression of getting Sex is basically - getting the name of defined as int Sex enum. then displaying only first letter of the name, so F or M -->
             <p class="m-0">@Model.Creator.UserName @Model.Creator.GetAge() @Enum.GetName(typeof(Sex), Model.Creator.Sex)[0]</p>
             <p class="m-0" style=" word-spacing: 12px;">@Model.CreationDate.ToString("H:mm dd/MM/yyyy")</p>
+            <i class="report-icon fas fa-exclamation-triangle"></i>
         </div>
         <div>
             <h1 class="post__title">@Model.Title</h1>
@@ -14,15 +15,16 @@
                 <button class="btn btn-dark" type="button" data-toggle="collapse" data-target=".comments-@Model.Id" aria-expanded="false" aria-controls="comments">
                     &dArr;
                 </button>
-                <div class=" comments-@Model.Id"> @* add class collapse *@
-                    <div class="add-comment__wrapper">
-                        <textarea  placeholder="Your comment" class="add-comment__textarea form-control"></textarea>
-                        <a class="btn">Add</a>
-                    </div>
-                    <partial name="_CommentPartial" />
-                </div>
             </div>
-
+            <div class="comments comments-@Model.Id">
+                @* add class collapse *@
+                <div class="add-comment__wrapper">
+                    <textarea placeholder="Your comment" class="add-comment__textarea form-control"></textarea>
+                    <a class="btn">Add</a>
+                </div>
+                <partial name="_CommentPartial" />
+                <partial name="_CommentPartial" />
+            </div>
         </div>
     </div>
 </div>

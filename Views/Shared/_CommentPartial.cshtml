@@ -5,9 +5,29 @@
             <!--  The expression of getting Sex is basically - getting the name of defined as int Sex enum. then displaying only first letter of the name, so F or M -->
             <p class="m-0">Litt</p>
             <p class="m-0">25.08</p>
+            <i class="report-icon fas fa-exclamation-triangle"></i>
         </div>
         <div>
-            <p class="post__text">asdasdasdasd</p>
+            <p class="comment__text">asdasdasdasd</p>
         </div>
+        @* IF ANY CHILD COMMENTS EXIST.
+            SWITCH @Model.Id for @Model.Comment.Id*@
+        @if (true)
+        {
+            <div class="text-center">
+                <button class="btn btn-sm btn-secondary" type="button" data-toggle="collapse" data-target=".child-comments-@Model.Id" aria-expanded="false" aria-controls="child-comments">
+                    &dArr;
+                </button>
+            </div>
+        }
+        <div class="child-comments-@Model.Id collapse">
+            <partial name="_ChildCommentPartial" />
+            <partial name="_ChildCommentPartial" />
+            <partial name="_ChildCommentPartial" />
+            <partial name="_ChildCommentPartial" />
+            <partial name="_ChildCommentPartial" />
+            <partial name="_ChildCommentPartial" />
+        </div>
+
     </div>
 </div>
