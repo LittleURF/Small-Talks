@@ -17,6 +17,7 @@
     </div>
 </header>
 <br />
+
 <div class="row d-flex justify-content-center">
     <a asp-action="CreatePost" class="btn btn-success btn-lg">Create new post!</a>
 </div>
@@ -24,11 +25,11 @@
 <br />
 
 @* TODO, Change to one set of data swapping between dropdown and the standard grid *@
-<div class="tags__dropdown dropdown d-flex justify-content-center" >
-    <button class="btn btn-dark dropdown-toggle"  style="width: 320px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="tags__dropdown dropdown d-flex justify-content-center">
+    <button class="btn btn-dark dropdown-toggle" style="width: 320px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Tags
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"  style="width: 320px;">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 320px;">
         @for (int i = 0; i < Model.Tags.Count(); i++)
         {
             <div class="tag dropdown-item text-center" style="position: relative;">
@@ -40,24 +41,30 @@
         }
     </div>
 </div>
-<div class="row">
-    <div class="tags row m-auto  d-flex justify-content-between text-center" style="width: 90%;">
-        @for (int i = 0; i < Model.Tags.Count(); i++)
-        {
-        <div class="tag col-lg-4 col-md-6">
-            <input asp-for="@Model.Tags[i].Id" type="hidden" class="form-check-input" />
-            <input asp-for="@Model.Tags[i].IsActive" type="checkbox" class="form-check-input" />
-            <i class="tag__icon tag__icon-in-list @Model.Tags[i].FaClasses"></i>
-            <label class="form-check-label">@Model.Tags[i].Name</label>
+<form asp-action="Index">
+    <div class="row">
+        <div class="tags row m-auto  d-flex justify-content-between text-center" style="width: 90%;">
+            @for (int i = 0; i < Model.Tags.Count(); i++)
+            {
+            <div class="tag col-lg-4 col-md-6">
+                <input asp-for="@Model.Tags[i].Id" type="hidden" class="form-check-input" />
+                <input asp-for="@Model.Tags[i].FaClasses" type="hidden" class="form-check-input" />
+                <input asp-for="@Model.Tags[i].Name" type="hidden" class="form-check-input" />
+                <input asp-for="@Model.Tags[i]" type="hidden" class="form-check-input" />
+
+                <input asp-for="@Model.Tags[i].IsActive" type="checkbox" class="form-check-input" />
+                <i class="tag__icon tag__icon-in-list @Model.Tags[i].FaClasses"></i>
+                <label class="form-check-label">@Model.Tags[i].Name</label>
+
+            </div>
+            }
         </div>
-        }
+
     </div>
-</div>
-<div class="text-center">
-    <input type="submit" class="tags__btn btn btn-secondary m-auto" value="Update Tags" />
-</div>
-
-
+    <div class="text-center">
+        <input type="submit" class="tags__btn btn btn-secondary m-auto" value="Update Tags" />
+    </div>
+</form>
 <br />
 <section class="posts">
 

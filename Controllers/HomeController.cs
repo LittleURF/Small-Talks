@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmallTalks.Data;
@@ -21,11 +22,13 @@ namespace SmallTalks.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext _dbContext;
+        private UserManager<ApplicationUser> _userManager;
 
 
-        public HomeController(ApplicationDbContext dbContext)
+        public HomeController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
 
@@ -35,10 +38,9 @@ namespace SmallTalks.Controllers
                 .Include(p => p.Creator)
                 .Include(p => p.PostTags)
                 .Include(p => p.Comments)
+                .ThenInclude(p => p.Comments)
                 .OrderByDescending(p => p.CreationDate)
                 .ToListAsync();
-
-            await _dbContext.Comments.Include(c => c.Comments).ToListAsync(); // This line is needed to properly get Child comments in the posts object. TODO
 
             var tags = await _dbContext.Tags.ToListAsync();
 
@@ -53,11 +55,58 @@ namespace SmallTalks.Controllers
         }
 
 
+        [HttpPost]
+        [ActionName("Index")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IndexWithTags(List<Tag> tags)
+        {
+            var selectedTags = new List<Tag>(tags);
+
+
+            foreach (var tag in tags)
+            {
+                if(tag.IsActive == false)
+                {
+                    selectedTags.Remove(tag);
+                }
+            }
+
+            if(selectedTags.Count() == 0)
+            {
+                // Display an error message, you cant select no tags
+                return RedirectToAction(nameof(Index));
+            }
+
+            var posts = await _dbContext.Posts
+                .Include(p => p.Creator)
+                .Include(p => p.PostTags)
+                .Include(p => p.Comments)
+                .ThenInclude(p => p.Comments)
+                .Where(c => c.PostTags.Any(pt => selectedTags.Contains(pt.Tag)))
+                .OrderByDescending(p => p.CreationDate)
+                .ToListAsync();
+
+            await _dbContext.Tags.ToListAsync(); // Fills up Tags in the Posts
+
+            var model = new PostsWithTags { Posts = posts, Tags = tags };
+
+
+            return View(model);
+        }
+
 
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> CreatePost()
         {
+            var user = await GetCurrentUserAsync();
+
+            if (user.Points < 50)
+            {
+                //TODO Display error message
+                return RedirectToAction(nameof(Index));
+            }
+
             var model = new PostWithTags();
 
             model.Tags = await _dbContext.Tags.ToListAsync();
@@ -70,6 +119,8 @@ namespace SmallTalks.Controllers
         [Authorize]
         public async Task<IActionResult> CreatePostSubmitted(PostWithTags model)
         {
+            var user = await GetCurrentUserAsync();
+
             if (ModelState.IsValid)
             {
                 // Adds the Post to the  DB Posts Table
@@ -80,6 +131,14 @@ namespace SmallTalks.Controllers
                     CreationDate = DateTime.Now,
                     CreatorId = User.FindFirst(ClaimTypes.NameIdentifier).Value    // Gets current user Id
                 };
+
+                if (user.Points < 50)
+                {
+                    //TODO Display error message
+                    return RedirectToAction(nameof(Index));
+                }
+                await SubstractPointsFromUserAsync(50);
+
 
                 await _dbContext.Posts.AddAsync(post);
                 await _dbContext.SaveChangesAsync(); // Needed to get proper PostId
@@ -104,6 +163,9 @@ namespace SmallTalks.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> AddComment(Comment model)
         {
             if (ModelState.IsValid)
@@ -116,7 +178,7 @@ namespace SmallTalks.Controllers
                     CreatorId = User.FindFirst(ClaimTypes.NameIdentifier).Value,    // Gets current user Id
                 };
 
-
+                await AddPointsToUserAsync(50);
                 await _dbContext.Comments.AddAsync(comment);
                 await _dbContext.SaveChangesAsync();
             }
@@ -125,6 +187,9 @@ namespace SmallTalks.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> AddChildComment(ChildComment model)
         {
             if (ModelState.IsValid)
@@ -139,12 +204,31 @@ namespace SmallTalks.Controllers
                 };
 
 
+                await AddPointsToUserAsync(25);
+
                 await _dbContext.ChildComments.AddAsync(comment);
                 await _dbContext.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));
 
+        }
+
+        private Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        }
+
+        private async Task AddPointsToUserAsync(int points)
+        {
+            var user = await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            user.Points += points;
+        }
+
+        private async Task SubstractPointsFromUserAsync(int points)
+        {
+            var user = await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            user.Points -= points;
         }
     }
 }

@@ -45,6 +45,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>

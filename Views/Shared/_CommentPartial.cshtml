@@ -11,31 +11,30 @@
         <div>
             <p class="comment__text">@Model.Content</p>
         </div>
-        <span data-toggle="collapse" data-target=".add-child-comment-@Model.Id" aria-expanded="false" aria-controls="add-child-comment">Reply</span>
-        @* IF ANY CHILD COMMENTS EXIST.
-            SWITCH @Model.Id for @Model.Comment.Id*@
-        @if (Model.Comments.Count() > 0 )
-        {
-            <div class="text-center">
+        <div class="comment__bottom text-center">
+            <button type="button" class="comment__reply btn btn-dark" data-toggle="collapse" data-target=".add-child-comment-@Model.Id" aria-expanded="false" aria-controls="add-child-comment">Reply</button>
+
+            @if (Model.Comments.Count() > 0)
+            {
                 <button class="btn btn-sm btn-secondary" type="button" data-toggle="collapse" data-target=".child-comments-@Model.Id" aria-expanded="false" aria-controls="child-comments">
                     &dArr;
                 </button>
-            </div>
-        }
+            }
+        </div>
         <div class="collapse add-child-comment-@Model.Id">
             <div class="add-comment__wrapper text-center">
                 <form asp-action="AddChildComment">
-                    <input asp-for="Id" type="hidden" name="CommentId"/>
+                    <input asp-for="Id" type="hidden" name="CommentId" />
                     <input asp-for="PostId" type="hidden" />
-                    <textarea name="Content" placeholder="Your comment" class="add-comment__textarea form-control"></textarea>
-                    <input type="submit" class="btn" value="Add" />
+                    <textarea name="Content" placeholder="Your comment" class="add-comment__textarea form-control" required maxlength="2000"></textarea>
+                    <input type="submit" class="btn btn-main mt-1" value="Add" />
                 </form>
             </div>
         </div>
         <div class="child-comments-@Model.Id collapse">
             @foreach (var childComment in Model.Comments)
             {
-                <partial name="_ChildCommentPartial" model="childComment"/>
+                <partial name="_ChildCommentPartial" model="childComment" />
             }
 
         </div>
