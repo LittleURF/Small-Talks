@@ -24,7 +24,6 @@ namespace SmallTalks.Controllers
         private ApplicationDbContext _dbContext;
         private UserManager<ApplicationUser> _userManager;
 
-
         public HomeController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
@@ -166,7 +165,7 @@ namespace SmallTalks.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> AddComment(Comment model)
+        public async Task<Comment> AddComment(Comment model)
         {
             if (ModelState.IsValid)
             {
@@ -181,9 +180,13 @@ namespace SmallTalks.Controllers
                 await AddPointsToUserAsync(50);
                 await _dbContext.Comments.AddAsync(comment);
                 await _dbContext.SaveChangesAsync();
+                return comment;
+            }
+            else
+            {
+                return null;
             }
 
-            return RedirectToAction(nameof(Index));
 
         }
 

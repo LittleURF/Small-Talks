@@ -46,17 +46,17 @@
         <div class="tags row m-auto  d-flex justify-content-between text-center" style="width: 90%;">
             @for (int i = 0; i < Model.Tags.Count(); i++)
             {
-            <div class="tag col-lg-4 col-md-6">
-                <input asp-for="@Model.Tags[i].Id" type="hidden" class="form-check-input" />
-                <input asp-for="@Model.Tags[i].FaClasses" type="hidden" class="form-check-input" />
-                <input asp-for="@Model.Tags[i].Name" type="hidden" class="form-check-input" />
-                <input asp-for="@Model.Tags[i]" type="hidden" class="form-check-input" />
+                <div class="tag col-lg-4 col-md-6">
+                    <input asp-for="@Model.Tags[i].Id" type="hidden" class="form-check-input" />
+                    <input asp-for="@Model.Tags[i].FaClasses" type="hidden" class="form-check-input" />
+                    <input asp-for="@Model.Tags[i].Name" type="hidden" class="form-check-input" />
+                    <input asp-for="@Model.Tags[i]" type="hidden" class="form-check-input" />
 
-                <input asp-for="@Model.Tags[i].IsActive" type="checkbox" class="form-check-input" />
-                <i class="tag__icon tag__icon-in-list @Model.Tags[i].FaClasses"></i>
-                <label class="form-check-label">@Model.Tags[i].Name</label>
+                    <input asp-for="@Model.Tags[i].IsActive" type="checkbox" class="form-check-input" />
+                    <i class="tag__icon tag__icon-in-list @Model.Tags[i].FaClasses"></i>
+                    <label class="form-check-label">@Model.Tags[i].Name</label>
 
-            </div>
+                </div>
             }
         </div>
 
@@ -73,3 +73,8 @@
         <partial name="_PostPartial" model="post" />
     }
 </section>
+
+
+<script>
+
+</script>

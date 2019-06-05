@@ -23,7 +23,7 @@
         </div>
         <div class="collapse add-child-comment-@Model.Id">
             <div class="add-comment__wrapper text-center">
-                <form asp-action="AddChildComment">
+                <form asp-action="AddChildComment" data-ajax="true"  data-ajax-success="commentAdded" data-ajax-method="post">
                     <input asp-for="Id" type="hidden" name="CommentId" />
                     <input asp-for="PostId" type="hidden" />
                     <textarea name="Content" placeholder="Your comment" class="add-comment__textarea form-control" required maxlength="2000"></textarea>
@@ -41,3 +41,9 @@
 
     </div>
 </div>
+
+<script>
+    function commentAdded(xhr) {
+        alert("Your comment has been added!");
+    }
+</script>

@@ -19,26 +19,40 @@
                 }
             </div>
             <div class="text-center">
-                <button class="btn btn-dark" type="button" data-toggle="collapse" data-target=".comments-@Model.Id" aria-expanded="false" aria-controls="comments">
+                <button class="btn btn-dark" type="button" data-toggle="collapse" data-target=".comments-section-@Model.Id" aria-expanded="false" aria-controls="comments-section">
                     &dArr;
                 </button>
             </div>
-            <div class="comments comments-@Model.Id">
-                @* add class collapse *@
+            <section class="collapse comments-section comments-section-@Model.Id">
                 <div class="add-comment__wrapper text-center">
-                    <form asp-action="AddComment">
+                    <form asp-action="AddComment" data-ajax="true" data-ajax-success="commentAdded" data-ajax-method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <input asp-for="Id" type="hidden" name="PostId" />
                         <textarea name="Content" placeholder="Your comment" class="add-comment__textarea form-control" required maxlength="2000"></textarea>
                         <input type="submit" class="btn mt-1" value="Add" />
                     </form>
                 </div>
-                @foreach (var comment in Model.Comments)
-                {
-                    <partial name="_CommentPartial" model="@comment" />
-                }
+                <div class="comments" id="comments-1">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <partial name="_CommentPartial" model="@comment" />
+                    }
 
-            </div>
+                </div>
+            </section>
         </div>
     </div>
 </div>
+
+<script>
+    commentAdded = function (xhr) {
+        alert(`Well shit`);
+        // This works but needs the actual ID of the comments section / post
+        const comments = document.getElementById("comments-1");
+
+        let newBox = document.createElement('p');
+        newBox.className = "comment";
+
+        comments.appendChild(newBox);
+    };
+</script>
