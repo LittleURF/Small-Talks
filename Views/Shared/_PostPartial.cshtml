@@ -32,7 +32,7 @@
                         <input type="submit" class="btn mt-1" value="Add" />
                     </form>
                 </div>
-                <div class="comments" id="comments-1">
+                <div class="comments" id="comments-@Model.Id">
                     @foreach (var comment in Model.Comments)
                     {
                         <partial name="_CommentPartial" model="@comment" />
@@ -45,14 +45,8 @@
 </div>
 
 <script>
-    commentAdded = function (xhr) {
+    commentAdded = function (comment) {
         alert(`Well shit`);
-        // This works but needs the actual ID of the comments section / post
-        const comments = document.getElementById("comments-1");
-
-        let newBox = document.createElement('p');
-        newBox.className = "comment";
-
-        comments.appendChild(newBox);
+        console.log(comment);
     };
 </script>

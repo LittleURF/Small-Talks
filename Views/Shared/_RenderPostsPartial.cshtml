@@ -1,0 +1,6 @@
+﻿@model PostsWithTags
+
+@foreach (var post in Model.Posts)
+{
+    <partial name="_PostPartial" model="post" />
+}

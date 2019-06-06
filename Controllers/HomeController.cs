@@ -31,7 +31,7 @@ namespace SmallTalks.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(List<Tag> tags)
         {
             var posts = await _dbContext.Posts
                 .Include(p => p.Creator)
@@ -41,12 +41,12 @@ namespace SmallTalks.Controllers
                 .OrderByDescending(p => p.CreationDate)
                 .ToListAsync();
 
-            var tags = await _dbContext.Tags.ToListAsync();
+            //var tags = await _dbContext.Tags.ToListAsync();
 
-            foreach (var tag in tags)
-            {
-                tag.IsActive = true;
-            }
+            //foreach (var tag in tags)
+            //{
+            //    tag.IsActive = true;
+            //}
 
             var model = new PostsWithTags { Posts = posts, Tags = tags };
 
@@ -59,18 +59,9 @@ namespace SmallTalks.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> IndexWithTags(List<Tag> tags)
         {
-            var selectedTags = new List<Tag>(tags);
+            var selectedTags = FilterTags(tags);
 
-
-            foreach (var tag in tags)
-            {
-                if(tag.IsActive == false)
-                {
-                    selectedTags.Remove(tag);
-                }
-            }
-
-            if(selectedTags.Count() == 0)
+            if (selectedTags.Count() == 0)
             {
                 // Display an error message, you cant select no tags
                 return RedirectToAction(nameof(Index));
@@ -83,6 +74,7 @@ namespace SmallTalks.Controllers
                 .ThenInclude(p => p.Comments)
                 .Where(c => c.PostTags.Any(pt => selectedTags.Contains(pt.Tag)))
                 .OrderByDescending(p => p.CreationDate)
+                .Take(2)
                 .ToListAsync();
 
             await _dbContext.Tags.ToListAsync(); // Fills up Tags in the Posts
@@ -91,6 +83,35 @@ namespace SmallTalks.Controllers
 
 
             return View(model);
+        }
+
+        [HttpPost]
+        public object GetTags(List<Tag> tags)
+        {
+            var dataJson = Json(tags);
+            return dataJson;
+        }
+
+        public async Task<IActionResult> GetMorePostsPartial(List<Tag> tags, int postsCount)
+        {
+            var selectedTags = FilterTags(tags);
+
+            var posts = await _dbContext.Posts
+                .Include(p => p.Creator)
+                .Include(p => p.PostTags)
+                .Include(p => p.Comments)
+                .ThenInclude(p => p.Comments)
+                .Where(c => c.PostTags.Any(pt => selectedTags.Contains(pt.Tag)))
+                .OrderByDescending(p => p.CreationDate)
+                .Skip(postsCount)
+                .Take(1)
+                .ToListAsync();
+
+            await _dbContext.Tags.ToListAsync(); // Fills up Tags in the Posts
+
+            var model = new PostsWithTags { Posts = posts, Tags = tags };
+
+            return PartialView("_RenderPostsPartial", model);
         }
 
 
@@ -165,6 +186,7 @@ namespace SmallTalks.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
+        // This method serves only AJAX requests
         public async Task<Comment> AddComment(Comment model)
         {
             if (ModelState.IsValid)
@@ -182,10 +204,8 @@ namespace SmallTalks.Controllers
                 await _dbContext.SaveChangesAsync();
                 return comment;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
 
 
         }
@@ -232,6 +252,20 @@ namespace SmallTalks.Controllers
         {
             var user = await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             user.Points -= points;
+        }
+
+        private List<Tag> FilterTags(List<Tag> tags)
+        {
+            var selectedTags = new List<Tag>(tags);
+
+            foreach (var tag in tags)
+            {
+                if (tag.IsActive == false)
+                {
+                    selectedTags.Remove(tag);
+                }
+            }
+            return selectedTags;
         }
     }
 }

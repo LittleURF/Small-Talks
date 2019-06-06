@@ -67,5 +67,6 @@ C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Views\Home\CreatePost.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CommentPartial.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_ChildCommentPartial.g.cshtml.cs
-C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_TempMessagePartial.g.cshtml.cs
+C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_RenderPostsPartial.g.cshtml.cs
