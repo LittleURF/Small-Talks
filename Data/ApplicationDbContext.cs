@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +12,17 @@ namespace SmallTalks.Data
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PostTags>()
-                .HasKey(pt => new { pt.PostId, pt.TagId});
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<PostTags>()
+                .HasKey(pt => new { pt.PostId, pt.TagId });
+
+            modelBuilder.Entity<ApplicationUser>()
+                 .HasMany(e => e.Roles)
+                 .WithOne()
+                 .HasForeignKey(e => e.UserId)
+                 .IsRequired()
+                 .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Post> Posts { get; set; }
@@ -27,6 +36,16 @@ namespace SmallTalks.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+
+        public  List<ApplicationUser> GetUsersWithRole(string roleId)
+        {
+            var users = Users
+                .Include(u => u.Roles)
+                .Where(u => u.Roles.Any(r => r.RoleId == roleId))
+                .ToList();
+
+            return users;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,10 +13,12 @@ namespace SmallTalks.Models
 
         [Required]
         public string UserId { get; set; }
+        public string BannedById { get; set; }
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; } // Uses a SQL trigger to calculate EndTime
+        public DateTime EndTime { get; set; }
+
+        [NotMapped]
         public TimeSpan Duration { get; set; }
-        public bool? IsActive { get; set; }
     }
 }

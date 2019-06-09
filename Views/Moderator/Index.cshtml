@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+@if (TempData["TempMessage"] != null)
+{
+    <partial name="_TempMessagePartial" model="@TempData["TempMessage"].ToString()" />
+}
+<br />
+<br />
+<br />
+<section class="moderation d-flex justify-content-center flex-wrap">
+    <section class="reports-to-review col-md-10 col-lg-8">
+        <h3>Reports to review</h3>
+        <table class="table table-sm table-light table-striped">
+            <thead>
+                <tr>
+                    <th>Report Id</th>
+                    <th>Message</th>
+                    <th>Reported Object</th>
+                    <th>Reported by</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr>
+                <td>5</td>
+                <td>He was mean</td>
+                <td>Comment ID 195</td>
+                <td>Hubson</td>
+                <td><i class="fas fa-external-link-square-alt"></i></td>
+
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>He was mean</td>
+                <td>Comment ID 195</td>
+                <td>Hubson</td>
+                <td><i class="fas fa-external-link-square-alt"></i></td>
+
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>He was mean</td>
+                <td>Comment ID 195</td>
+                <td>Hubson</td>
+                <td><i class="fas fa-external-link-square-alt"></i></td>
+            </tr>
+        </table>
+    </section>
+    <section class="bans-section col-md-8 col-lg-4 m-auto">
+        <h3>User History</h3>
+        <div class="row">
+            <form asp-action="GetUserBanHistory" class="form--small">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group text-center">
+                    <input class="form-control d-inline-block" type="text" name="userName" placeholder="Username" required />
+                    <input class="btn--short btn btn-primary mt-2" type="submit" value="Search" />
+                </div>
+            </form>
+        </div>
+
+        <h3>Ban user</h3>
+        <div class="row">
+            <form asp-action="BanUser" class="form--small">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group text-center ">
+                    <input class= form-control mr-2" type="text" name="userName" placeholder="Username" aria-label="Username" required />
+                    <textarea class="form-control mb-1 mt-1" type="text" name="description" placeholder="Description" aria-label="Description" required></textarea>
+                    <input class=" form-control" type="date" name="endTime" placeholder="Ending Date" aria-label="Ending Date" required />
+                    <input class="btn--short btn btn-danger mt-2" type="submit" value="Ban" />
+                </div>
+            </form>
+        </div>
+
+        <h3>Unban user</h3>
+        <div class="row">
+            <form asp-action="UnbanUser" class="form--small">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group text-center">
+                    <input class=" form-control d-inline-block" type="text" name="userName" placeholder="Username" required />
+                    <input class="btn--short d-inline-block btn btn-success mt-2" type="submit" value="Unban" />
+                </div>
+            </form>
+        </div>
+    </section>
+</section>

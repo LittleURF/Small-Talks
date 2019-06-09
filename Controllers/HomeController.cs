@@ -18,8 +18,14 @@ using SmallTalks.ViewModels;
 namespace SmallTalks.Controllers
 {
     /*
+     * Admin/Mod Views and functionality
+     * Report functionality
+     * Make login check if user is banned(notes in notepad)
      * 
-     * 
+     * Front end
+     * Login/Reigstration Views
+     * (optional) make a detail View for a user, post
+     * (optional) Attach the Load more function to a scroll instead of button click
     */
     public class HomeController : Controller
     {
@@ -31,6 +37,9 @@ namespace SmallTalks.Controllers
             _dbContext = dbContext;
             _userManager = userManager;
         }
+
+        [TempData]
+        public string TempMessage { get; set; }
 
 
         public async Task<IActionResult> Index()
@@ -59,7 +68,8 @@ namespace SmallTalks.Controllers
 
             if (selectedTags.Count() == 0)
             {
-                // Display an error message, you cant select no tags
+                TempMessage = "You have to select at least one tag";
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -92,7 +102,7 @@ namespace SmallTalks.Controllers
 
             if (user.Points < 50)
             {
-                //TODO Display error message
+                TempMessage = "You don't have enough points to create a post. For more info check the Instructions page";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -123,7 +133,7 @@ namespace SmallTalks.Controllers
 
                 if (user.Points < 50)
                 {
-                    //TODO Display error message
+                    TempMessage = "You don't have enough points to create a post. For more info check the Instructions page";
                     return RedirectToAction(nameof(Index));
                 }
                 await SubstractPointsFromUserAsync(50);
@@ -149,6 +159,7 @@ namespace SmallTalks.Controllers
 
                 await _dbContext.SaveChangesAsync();
             }
+            TempMessage = "Created comment succesfully";
             return RedirectToAction(nameof(Index));
         }
 
@@ -191,11 +202,11 @@ namespace SmallTalks.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> AddChildComment(ChildComment model)
+        public async Task<ChildComment> AddChildComment(ChildComment model)
         {
             if (ModelState.IsValid)
             {
-                var comment = new ChildComment
+                var childComment = new ChildComment
                 {
                     Content = model.Content,
                     PostId = model.PostId,
@@ -207,12 +218,24 @@ namespace SmallTalks.Controllers
 
                 await AddPointsToUserAsync(25);
 
-                await _dbContext.ChildComments.AddAsync(comment);
+                await _dbContext.ChildComments.AddAsync(childComment);
                 await _dbContext.SaveChangesAsync();
+                return childComment;
             }
+            return null;
 
-            return RedirectToAction(nameof(Index));
+        }
 
+        public IActionResult GetCommentPartial(Comment comment)
+        {
+
+            return PartialView("_CommentPartial", comment);
+        }
+
+        public IActionResult GetChildCommentPartial(ChildComment childComment)
+        {
+
+            return PartialView("_ChildCommentPartial", childComment);
         }
 
         private async Task<List<Post>> GetPosts(int amount, List<Tag> tags)
@@ -220,8 +243,8 @@ namespace SmallTalks.Controllers
             var posts = await _dbContext.Posts
                 .Include(p => p.Creator)
                 .Include(p => p.PostTags)
-                .Include(p => p.Comments)
-                .ThenInclude(p => p.Comments)
+                .Include(p => p.Comments).ThenInclude(c => c.Creator)
+                .Include(p => p.Comments).ThenInclude(c => c.Comments)
                 .Where(c => c.PostTags.Any(pt => tags.Contains(pt.Tag)))
                 .OrderByDescending(p => p.CreationDate)
                 .Take(amount)

@@ -11,27 +11,32 @@
         <div>
             <p class="comment__text">@Model.Content</p>
         </div>
-        <div class="comment__bottom text-center">
-            <button type="button" class="comment__reply btn btn-dark" data-toggle="collapse" data-target=".add-child-comment-@Model.Id" aria-expanded="false" aria-controls="add-child-comment">Reply</button>
+        <div class="comment__bottom text-center" id="comment__bottom-@Model.Id">
+            <button type="button" class="comment__reply btn btn-dark" data-toggle="collapse" data-target="#add-child-comment-@Model.Id" aria-expanded="false" aria-controls="add-child-comment">Reply</button>
 
-            @if (Model.Comments.Count() > 0)
-            {
-                <button class="btn btn-sm btn-secondary" type="button" data-toggle="collapse" data-target=".child-comments-@Model.Id" aria-expanded="false" aria-controls="child-comments">
-                    &dArr;
-                </button>
-            }
+            @{ string display = "d-none";
+                if(Model.Comments.Count() > 0)
+                {
+                    display = "d-inline-block";
+                }
+
+                    }
+            <button class="btn btn-sm btn-secondary  @display" id="show-children-comments-btn-@Model.Id" type="button" data-toggle="collapse" data-target="#child-comments-@Model.Id" aria-expanded="false" aria-controls="child-comments">
+                &dArr;
+            </button>
         </div>
-        <div class="collapse add-child-comment-@Model.Id">
+        <div class="collapse" id="add-child-comment-@Model.Id">
             <div class="add-comment__wrapper text-center">
-                <form asp-action="AddChildComment" data-ajax="true"  data-ajax-success="commentAdded" data-ajax-method="post">
+                <form asp-action="AddChildComment" data-ajax="true" data-ajax-success="childCommentAdded" data-ajax-method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <input asp-for="Id" type="hidden" name="CommentId" />
                     <input asp-for="PostId" type="hidden" />
-                    <textarea name="Content" placeholder="Your comment" class="add-comment__textarea form-control" required maxlength="2000"></textarea>
+                    <textarea class="add-comment__textarea form-control" id="child-comment-textarea-@Model.Id" name="Content" placeholder="Your comment" required maxlength="2000"></textarea>
                     <input type="submit" class="btn btn-main mt-1" value="Add" />
                 </form>
             </div>
         </div>
-        <div class="child-comments-@Model.Id collapse">
+        <div class="collapse" id="child-comments-@Model.Id">
             @foreach (var childComment in Model.Comments)
             {
                 <partial name="_ChildCommentPartial" model="childComment" />
@@ -43,7 +48,19 @@
 </div>
 
 <script>
-    function commentAdded(xhr) {
-        alert("Your comment has been added!");
-    }
+    childCommentAdded = function (childComment) {
+        var div = $("<div></div>");
+
+        div.load("/Home/GetChildCommentPartial", { childComment })
+
+        div.slideUp();
+        $("#child-comments-" + childComment.commentId).append(div);
+        div.slideDown(250);
+
+        $("#child-comment-textarea-" + childComment.commentId).val("");
+
+        $("#show-children-comments-btn-" + childComment.commentId).removeClass("d-none");
+
+
+    };
 </script>

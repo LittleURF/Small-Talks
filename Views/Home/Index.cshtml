@@ -17,7 +17,10 @@
     </div>
 </header>
 <br />
-
+@if(TempData["TempMessage"] != null)
+{
+    <partial name="_TempMessagePartial" model="@TempData["TempMessage"]" />
+}
 <div class="row d-flex justify-content-center">
     <a asp-action="CreatePost" class="btn btn-success btn-lg">Create new post!</a>
 </div>
@@ -89,14 +92,15 @@
     <script>
         loadPosts = function (postsInfoJson) {
             var div = $("<div></div>");
-
+            
             var tags = postsInfoJson
             var postsCount = $('.post').length;
-
             div.load("/Home/GetMorePostsPartial", { tags, postsCount });
 
+            div.slideUp();
+
             $(".posts").append(div);
+            div.slideDown(400);
         };
     </script>
 }
-@*  @:activeTags.push( { id = @tag.Id, isActive = @tag.IsActive, name = @tag.Name, faClasses = "@tag.FaClasses" }); *@

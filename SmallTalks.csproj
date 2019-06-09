@@ -34,6 +34,16 @@
     <Compile Remove="Data\Migrations\20190603165314_Modifying Comments DB Structure2.Designer.cs" />
     <Compile Remove="Data\Migrations\20190603174203_Sm.cs" />
     <Compile Remove="Data\Migrations\20190603174203_Sm.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190607150657_Added roles to ApplicationUser Model.cs" />
+    <Compile Remove="Data\Migrations\20190607150657_Added roles to ApplicationUser Model.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190607161953_Added roles to ApplicationUser Model2.cs" />
+    <Compile Remove="Data\Migrations\20190607161953_Added roles to ApplicationUser Model2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190607162149_N to M Model UserRoles.cs" />
+    <Compile Remove="Data\Migrations\20190607162149_N to M Model UserRoles.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190608222814_Adding roles to ApplicationUser Model.cs" />
+    <Compile Remove="Data\Migrations\20190608222814_Adding roles to ApplicationUser Model.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190608223044_Adding roles to ApplicationUser Model.cs" />
+    <Compile Remove="Data\Migrations\20190608223044_Adding roles to ApplicationUser Model.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

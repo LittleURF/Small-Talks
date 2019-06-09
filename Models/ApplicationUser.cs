@@ -17,6 +17,8 @@ namespace SmallTalks.Models
         public int  CurrentBanId{ get; set; }
         public int Points { get; set; }
 
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; } = new List<IdentityUserRole<string>>(); // From microsoft documentation 
+
         public int GetAge()
         {
             var today = DateTime.Today;

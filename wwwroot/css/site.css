@@ -28,6 +28,11 @@ body {
     border: 1px solid #0083b0;
     color: white;
 }
+
+.input--short {
+    width: 285px;
+}
+
 .home__header-main {
     background: linear-gradient(to top, #00b4db, #0083b0);
     text-align: center;
@@ -130,6 +135,7 @@ p, .post__title {
     border-bottom-right-radius: 5px;
 }
 
+
 .post__wrapper:nth-child(even) .post {
     background-color: #f8f8f8;
 }
@@ -226,6 +232,16 @@ p, .post__title {
 
 .child-comment {
     background-color: #f3f3f3;
+}
+
+.form--small {
+    width: 400px;
+}
+
+.btn--short {
+    position:relative;
+    bottom: 2px; /*temp*/
+    min-width: 78px;
 }
 
 
