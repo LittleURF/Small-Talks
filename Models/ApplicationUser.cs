@@ -14,7 +14,8 @@ namespace SmallTalks.Models
         public DateTime BirthDate { get; set; }
         public Sex Sex { get; set; }
         public bool AccountLocked { get; set; }
-        public int  CurrentBanId{ get; set; }
+        public Ban CurrentBan { get; set; }
+        public int? CurrentBanId{ get; set; }
         public int Points { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; } = new List<IdentityUserRole<string>>(); // From microsoft documentation 

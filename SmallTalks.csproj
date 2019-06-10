@@ -44,6 +44,8 @@
     <Compile Remove="Data\Migrations\20190608222814_Adding roles to ApplicationUser Model.Designer.cs" />
     <Compile Remove="Data\Migrations\20190608223044_Adding roles to ApplicationUser Model.cs" />
     <Compile Remove="Data\Migrations\20190608223044_Adding roles to ApplicationUser Model.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190609232400_Modifying User &amp; Ban entities.cs" />
+    <Compile Remove="Data\Migrations\20190609232400_Modifying User &amp; Ban entities.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
