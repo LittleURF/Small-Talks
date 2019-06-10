@@ -33,6 +33,8 @@ namespace SmallTalks.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> BanUser(string userName, string description, DateTime endTime)
         {
 
@@ -63,6 +65,8 @@ namespace SmallTalks.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UnbanUser(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
@@ -84,6 +88,23 @@ namespace SmallTalks.Controllers
 
             TempMessage = $"User {user.UserName} unbanned sucessfully!";
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GetUserBanHistory(string userName)
+        {
+            var user = await  _userManager.FindByNameAsync(userName);
+
+            if (user == null)
+            {
+                TempMessage = "User not found";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var banHistory = await _dbContext.Bans.Where(b => b.UserId == user.Id).ToListAsync();
+
+            return View(banHistory);
         }
 
         private Task<ApplicationUser> GetCurrentUserAsync()

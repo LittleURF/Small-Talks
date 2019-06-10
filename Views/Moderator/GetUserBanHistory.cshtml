@@ -1,0 +1,28 @@
+﻿@model List<Ban>
+@{
+    ViewData["Title"] = "User Ban History";
+}
+
+@* Make a View model containing The banning user, the banned user and the ban list  *@
+<h2 class="text-center">User Ban History</h2>
+<table class="table table-light table-striped">
+    <thead>
+        <tr>
+            <th>Ban Id</th>
+            <th>Description</th>
+            <th>Start - End</th>
+            <th>Banned by</th>
+        </tr>
+    </thead>
+    @foreach (var ban in Model)
+    {
+        <tr>
+            <td>@ban.Id</td>
+            <td>@ban.Description</td>
+            <td>@ban.StartTime - @ban.EndTime</td>
+            <td>@ban.BannedById</td>
+
+        </tr>
+    }
+    </table>
+
