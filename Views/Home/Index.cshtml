@@ -2,8 +2,19 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<!-- REPORT MODAL-->
+@*
+
+    The form needs the reported object ID, i can make seperate modals for post/comment reports
+    Every post and comment is gonna render its own partial with own data
+    Make the modal into a partial that takes in a model
+*@
+
+
+
+
 <header class="home__header-main full-width row text-white">
-    <div class="header__content d-flex justify-content-center align-items-start w-100 mb-4">
+    <div class="header__content d-flex justify-content-center align-items-start w-100 mb-5 mt-4">
         <div class="header__text">
             <h1 class="display-1 text-white text-center">Small Talks</h1>
             <p style="font-size: 150%; font-family: 'Segoe UI', Tahoma;">A place to talk about anything and everything!</p>
@@ -17,7 +28,7 @@
     </div>
 </header>
 <br />
-@if(TempData["TempMessage"] != null)
+@if (TempData["TempMessage"] != null)
 {
     <partial name="_TempMessagePartial" model="@TempData["TempMessage"]" />
 }
@@ -92,7 +103,7 @@
     <script>
         loadPosts = function (postsInfoJson) {
             var div = $("<div></div>");
-            
+
             var tags = postsInfoJson
             var postsCount = $('.post').length;
             div.load("/Home/GetMorePostsPartial", { tags, postsCount });
@@ -102,5 +113,13 @@
             $(".posts").append(div);
             div.slideDown(400);
         };
+
+        reportSent = function (reportedObject) {
+            var modalId = `report-modal-${reportedObject.objectId}-${reportedObject.objectType}`;
+            var modal = $(`#${modalId}`);
+
+            modal.modal('hide');
+
+        }
     </script>
 }

@@ -1,0 +1,31 @@
+﻿@model UserCreatedObj
+
+@{ var type = Enum.GetName(typeof(ObjectType), Model.ObjectType);
+}
+
+<div class="modal fade" id="report-modal-@Model.Id-@type" tabindex="-1" role="dialog" aria-labelledby="report-modal-label" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="report-modal-label">Report Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Reason of the report - what's wrong?</p>
+                <form asp-action="SendReport" data-ajax="true" data-ajax-success="reportSent" data-ajax-method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" value="@Model.Id" name="objectId" />
+                    <input type="hidden" value="@Model.ObjectType" name="objectType" />
+                    <textarea class="form-control" name="content" placeholder="..." required maxlength="1000"></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-danger" value="Send Report" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

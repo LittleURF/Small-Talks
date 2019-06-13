@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 namespace SmallTalks.Enums
 {
-    public enum ObjectType { Comment, Post }
+    public enum ObjectType { Comment, Post, ChildComment }
 }

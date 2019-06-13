@@ -28,9 +28,10 @@ namespace SmallTalks.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var reports = await _dbContext.Reports.Include(r => r.Reporter).ToListAsync();
+            return View(reports);
         }
 
         [HttpPost]
@@ -102,7 +103,12 @@ namespace SmallTalks.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var banHistory = await _dbContext.Bans.Where(b => b.UserId == user.Id).ToListAsync();
+            var banHistory = await _dbContext.Bans
+                .Include(b => b.BannedBy)
+                .Include(b => b.User)
+                .Where(b => b.UserId == user.Id)
+                .OrderByDescending(b => b.StartTime)
+                .ToListAsync();
 
             return View(banHistory);
         }
@@ -112,11 +118,16 @@ namespace SmallTalks.Controllers
             return _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
 
+        // to test
         private async Task<bool> IsBannedAsync(ApplicationUser user)
         {
             if (user.AccountLocked)
             {
-                var ban = await _dbContext.Users.Include(u => u.CurrentBan).Where(u => u.CurrentBanId == user.CurrentBanId).Select(u => u.CurrentBan).SingleOrDefaultAsync();
+                var ban = await _dbContext.Users
+                    .Include(u => u.Bans)
+                    .Where(u => u.CurrentBanId == user.CurrentBanId)
+                    .Select(u => u.Bans.Where(b => b.Id == u.CurrentBanId).SingleOrDefault())
+                    .SingleOrDefaultAsync();
 
                 if (DateTime.Now > ban.EndTime)
                 {

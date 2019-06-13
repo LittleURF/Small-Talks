@@ -1,12 +1,18 @@
 ﻿@model SmallTalks.Models.Comment
 
+@* Report Modal *@
+<partial name="_ReportModalPartial" model="new UserCreatedObj{ Id = Model.Id, ObjectType = ObjectType.Comment}" />
+
+
 <div class="row d-flex justify-content-center">
     <div class="comment">
         <div class="comment__data d-flex justify-content-between p-1 w-75 m-auto">
             <!--  The expression of getting Sex is basically - getting the name of defined as int Sex enum. then displaying only first letter of the name, so F or M -->
             <p class="m-0">@Model.Creator.UserName @Model.Creator.GetAge() @Enum.GetName(typeof(Sex), Model.Creator.Sex)[0]</p>
             <p class="m-0" style=" word-spacing: 12px;">@Model.CreationDate.ToString("H:mm dd/MM/yyyy")</p>
-            <i class="report-icon fas fa-exclamation-triangle"></i>
+            <a class="report-icon__wrapper" data-toggle="modal" data-target="#report-modal-@Model.Id-Comment">
+                <i class="report-icon fas fa-exclamation-triangle"></i>
+            </a>
         </div>
         <div>
             <p class="comment__text">@Model.Content</p>
@@ -15,12 +21,12 @@
             <button type="button" class="comment__reply btn btn-dark" data-toggle="collapse" data-target="#add-child-comment-@Model.Id" aria-expanded="false" aria-controls="add-child-comment">Reply</button>
 
             @{ string display = "d-none";
-                if(Model.Comments.Count() > 0)
+                if (Model.Comments.Count() > 0)
                 {
                     display = "d-inline-block";
                 }
 
-                    }
+            }
             <button class="btn btn-sm btn-secondary  @display" id="show-children-comments-btn-@Model.Id" type="button" data-toggle="collapse" data-target="#child-comments-@Model.Id" aria-expanded="false" aria-controls="child-comments">
                 &dArr;
             </button>

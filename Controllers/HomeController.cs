@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmallTalks.Data;
+using SmallTalks.Enums;
 using SmallTalks.Models;
 using SmallTalks.ViewModels;
 
@@ -223,6 +224,27 @@ namespace SmallTalks.Controllers
                 return childComment;
             }
             return null;
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<object> SendReport(int objectId, string objectType, string content)
+        {
+            var user = await GetCurrentUserAsync();
+
+            var newReport = new Report
+            {
+                ReporterId = user.Id,
+                ReportedObjectId = objectId,
+                ReportedObjectType = Enum.Parse<ObjectType>(objectType),
+                Content = content
+            };
+
+            await _dbContext.Reports.AddAsync(newReport);
+            await _dbContext.SaveChangesAsync();
+
+            return Json(new { objectId, objectType });
 
         }
 

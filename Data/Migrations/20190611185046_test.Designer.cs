@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmallTalks.Data;
 
 namespace SmallTalks.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190611185046_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,6 +183,10 @@ namespace SmallTalks.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CurrentBanId")
+                        .IsUnique()
+                        .HasFilter("[CurrentBanId] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -198,8 +204,6 @@ namespace SmallTalks.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BannedById");
-
                     b.Property<string>("Description");
 
                     b.Property<DateTime>("EndTime");
@@ -210,10 +214,6 @@ namespace SmallTalks.Data.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BannedById");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Bans");
                 });
@@ -386,16 +386,11 @@ namespace SmallTalks.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SmallTalks.Models.Ban", b =>
+            modelBuilder.Entity("SmallTalks.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("SmallTalks.Models.ApplicationUser", "BannedBy")
-                        .WithMany()
-                        .HasForeignKey("BannedById");
-
-                    b.HasOne("SmallTalks.Models.ApplicationUser", "User")
-                        .WithMany("Bans")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("SmallTalks.Models.Ban", "CurrentBan")
+                        .WithOne("BannedBy")
+                        .HasForeignKey("SmallTalks.Models.ApplicationUser", "CurrentBanId");
                 });
 
             modelBuilder.Entity("SmallTalks.Models.ChildComment", b =>

@@ -23,7 +23,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #0083b0;">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #243b55;">
         <div class="container">
             <div class="navbar-header">
                 <button class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,7 +38,7 @@
                     <li class="nav-item"><a class="nav-link " asp-controller="Home" asp-action="Index">Instructions</a></li>
                     @if (User.IsInAnyRole("Member", "Moderator", "Admin"))
                     {
-                    <li class="nav-item"><a class="nav-link " asp-controller="Moderator" asp-action="Index">Moderator</a></li>
+                        <li class="nav-item"><a class="nav-link " asp-controller="Moderator" asp-action="Index">Moderator</a></li>
                     }
                     @if (User.IsInAnyRole("Member", "Admin"))
                     {
@@ -52,7 +52,6 @@
     </nav>
 
     <partial name="_CookieConsentPartial" />
-
     <div class="container body-content">
         @RenderBody()
         <hr />

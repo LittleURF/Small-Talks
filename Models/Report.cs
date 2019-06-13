@@ -11,6 +11,8 @@ namespace SmallTalks.Models
     {
         public int Id { get; set; }
 
+        public ApplicationUser Reporter { get; set; }
+
         [Required]
         public string ReporterId { get; set; }
 

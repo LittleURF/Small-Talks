@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Report>
 @{
     ViewData["Title"] = "Index";
 }
@@ -11,45 +11,34 @@
 <br />
 <br />
 <section class="moderation d-flex justify-content-center flex-wrap">
-    <section class="reports-to-review col-md-10 col-lg-8">
-        <h3>Reports to review</h3>
-        <table class="table table-sm table-light table-striped">
-            <thead>
-                <tr>
-                    <th>Report Id</th>
-                    <th>Message</th>
-                    <th>Reported Object</th>
-                    <th>Reported by</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tr>
-                <td>5</td>
-                <td>He was mean</td>
-                <td>Comment ID 195</td>
-                <td>Hubson</td>
-                <td><i class="fas fa-external-link-square-alt"></i></td>
-
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>He was mean</td>
-                <td>Comment ID 195</td>
-                <td>Hubson</td>
-                <td><i class="fas fa-external-link-square-alt"></i></td>
-
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>He was mean</td>
-                <td>Comment ID 195</td>
-                <td>Hubson</td>
-                <td><i class="fas fa-external-link-square-alt"></i></td>
-            </tr>
-        </table>
+    <section class="reports-to-review col-md-12 col-lg-9 ">
+        <h2>Reports to review</h2>
+        <div class="table-responsive-md">
+            <table class="table table-sm table-light table-striped" style="min-width: 650px;">
+                <thead class="thead-light" style="font-family: 'Segoe UI light', Tahoma, Geneva, Verdana, sans-serif">
+                    <tr>
+                        <th>Id</th>
+                        <th >Message</th>
+                        <th style="width: 30%;">Reported Object</th>
+                        <th>Reported by</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach (var report in Model)
+                {
+                    <tr>
+                        <td>@report.Id</td>
+                        <td class="ellipsis"><span>@report.Content</span></td>
+                        <td>@report.ReportedObjectType - @report.ReportedObjectId</td>
+                        <td>@report.Reporter.UserName</td>
+                        <td><i class="fas fa-external-link-square-alt"></i></td>
+                    </tr>
+                }
+            </table>
+            </div>
     </section>
-    <section class="bans-section col-md-8 col-lg-4 m-auto">
-        <h3>User History</h3>
+    <section class="bans-section col-md-8 col-lg-3 mr-auto ml-auto mt-5">
+        <h4>User History</h4>
         <div class="row">
             <form asp-action="GetUserBanHistory" class="form--small">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>

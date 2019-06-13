@@ -23,6 +23,13 @@ namespace SmallTalks.Data
                  .HasForeignKey(e => e.UserId)
                  .IsRequired()
                  .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ApplicationUser>()
+                 .HasMany(e => e.Bans)
+                 .WithOne(i => i.User)
+                 .HasForeignKey(b => b.UserId)
+                 .IsRequired()
+                 .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Post> Posts { get; set; }
