@@ -265,6 +265,17 @@ p, .post__title {
     color: #ff5e5e;
 }
 
+.reported-object {
+    border: 1px solid red;
+    min-height: 120px;
+}
+
+.reported-object__preview {
+   background-color: #eee;
+   border-radius: 5px;
+}
+
+
 .ellipsis {
     position: relative;
 }

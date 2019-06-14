@@ -1,0 +1,64 @@
+﻿@model ReportDetailsViewModel
+
+@{
+    ViewData["Title"] = "Report Details";
+}
+<br />
+
+<div class="modal fade" id="ban-modal" tabindex="-1" role="dialog" aria-labelledby="ban-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ban-model-label">Ban @Model.ReportedObject.Creator.UserName</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Reason of the report - what's wrong?</p>
+                <form asp-action="BanUser">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" value="@Model.ReportedObject.Creator.UserName" name="userName" />
+                    <input type="hidden" value="@Model.Report.Id" name="reportId" />
+
+                    <textarea class="form-control mb-2" name="description" placeholder="..." required maxlength="1000"></textarea>
+                    <p>End Date</p>
+                    <input class="form-control" type="date" name="endTime" placeholder="Ending Date" aria-label="Ending Date" required />
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-danger" value="Send Report" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 class="display-4 text-center">Report ID @Model.Report.Id</h1>
+<br />
+
+<br />
+<div class="reported-object row d-flex justify-content-between w-75 m-auto bg-light p-2">
+    <h4 class="w-100 text-center">@Model.Report.ReportedObjectType</h4>
+    <p class="w-100 text-center">Reported by @Model.ReportedObject.Creator.UserName</p>
+    <p class="w-100 text-center">@Model.Report.Content</p>
+    <div class="reported-object__preview p-2 w-100">
+        <div class="d-flex justify-content-between mb-2">
+            <span>@Model.ReportedObject.Creator.UserName</span>
+            <span>@Model.ReportedObject.CreationDate</span>
+        </div>
+        @if (Model.Report.ReportedObjectType == ObjectType.Post)
+        {
+            <h4>@Model.ReportedObject.Title</h4>
+            <br />
+        }
+        <p>@Model.ReportedObject.Content</p>
+    </div>
+
+
+</div>
+<div class="text-center mt-1 mb-4">
+    <a asp-action="RemoveReport" asp-route-id="@Model.Report.Id" class="btn btn-light">Ignore</a>
+    <a asp-action="BanFromReport" asp-route-id="@Model.ReportedObject.Creator.UserName" data-toggle="modal" data-target="#ban-modal" class="btn btn-danger">Ban</a>
+</div>
+<partial name="_PostReadonlyPartial" model="Model.Post" />

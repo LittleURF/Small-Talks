@@ -1,0 +1,34 @@
+﻿@model SmallTalks.Models.Comment
+
+<div class="row d-flex justify-content-center">
+    <div class="comment">
+        <div class="comment__data d-flex justify-content-between p-1 w-75 m-auto">
+            <!--  The expression of getting Sex is basically - getting the name of defined as int Sex enum. then displaying only first letter of the name, so F or M -->
+            <p class="m-0">@Model.Creator.UserName @Model.Creator.GetAge() @Enum.GetName(typeof(Sex), Model.Creator.Sex)[0]</p>
+            <p class="m-0" style=" word-spacing: 12px;">@Model.CreationDate.ToString("H:mm dd/MM/yyyy")</p>
+        </div>
+        <div>
+            <p class="comment__text">@Model.Content</p>
+        </div>
+        <div class="comment__bottom text-center" id="comment__bottom-@Model.Id">
+            @{ string display = "d-none";
+                if (Model.Comments.Count() > 0)
+                {
+                    display = "d-inline-block";
+                }
+
+            }
+            <button class="btn btn-sm btn-secondary  @display" id="show-children-comments-btn-@Model.Id" type="button" data-toggle="collapse" data-target="#child-comments-@Model.Id" aria-expanded="false" aria-controls="child-comments">
+                &dArr;
+            </button>
+        </div>
+        <div class="collapse" id="child-comments-@Model.Id">
+            @foreach (var childComment in Model.Comments)
+            {
+                <partial name="_ChildCommentReadonlyPartial" model="childComment" />
+            }
+
+        </div>
+
+    </div>
+</div>

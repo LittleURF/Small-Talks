@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmallTalks.Data;
+using SmallTalks.Enums;
 using SmallTalks.Models;
+using SmallTalks.ViewModels;
 
 namespace SmallTalks.Controllers
 {
@@ -36,7 +38,7 @@ namespace SmallTalks.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BanUser(string userName, string description, DateTime endTime)
+        public async Task<IActionResult> BanUser(string userName, string description, DateTime endTime, int? reportId)
         {
 
             var currentUser = await GetCurrentUserAsync();
@@ -56,6 +58,12 @@ namespace SmallTalks.Controllers
                 StartTime = DateTime.Now,
                 EndTime = endTime,
             };
+
+            if (reportId != null)
+            {
+                var report = await _dbContext.Reports.Where(r => r.Id == reportId).SingleOrDefaultAsync();
+                _dbContext.Reports.Remove(report);
+            }
 
             // Changing user fields is handled in a MSSQL trigger(Bans table)
             await _dbContext.Bans.AddAsync(ban);
@@ -112,6 +120,71 @@ namespace SmallTalks.Controllers
 
             return View(banHistory);
         }
+
+        public async Task<IActionResult> ReportDetails(int id)
+        {
+            var model = new ReportDetailsViewModel();
+            var report = await _dbContext.Reports.Include(r => r.Reporter).Where(r => r.Id == id).SingleOrDefaultAsync();
+            int? postId = null;
+
+            // How the hell do i achieve polymorphism since i shouldnt create methods in Models
+            if (report.ReportedObjectType == ObjectType.Post)
+            {
+                 model.ReportedObject = await _dbContext.Posts.Include(c => c.Creator).Where(p => p.Id == report.ReportedObjectId).SingleOrDefaultAsync();
+                postId = model.ReportedObject.Id;
+            }
+
+            else if (report.ReportedObjectType == ObjectType.Comment)
+            {
+                model.ReportedObject = await _dbContext.Comments.Include(c => c.Creator).Where(p => p.Id == report.ReportedObjectId).SingleOrDefaultAsync();
+                postId = model.ReportedObject.PostId;
+
+            }
+
+            else if (report.ReportedObjectType == ObjectType.ChildComment)
+            {
+                model.ReportedObject = await _dbContext.ChildComments.Include(c => c.Creator).Where(p => p.Id == report.ReportedObjectId).SingleOrDefaultAsync();
+                postId = model.ReportedObject.PostId;
+            }
+
+            model.Report = report;
+
+
+            model.Post = await _dbContext.Posts
+                .Include(p => p.Creator)
+                .Include(p => p.PostTags)
+                .Include(p => p.Comments).ThenInclude(c => c.Creator)
+                .Include(p => p.Comments).ThenInclude(c => c.Comments)
+                .Where(p => p.Id == postId)
+                .SingleOrDefaultAsync();
+
+            // Load users that are authors of Child Comments
+            await _dbContext.Users
+                .Where(u => model.Post.Comments
+                .Any(c => c.Comments.Any(cc => cc.CreatorId == u.Id)))
+                .LoadAsync();
+
+
+            await _dbContext.Tags.LoadAsync(); // Fills up Tags in the Posts
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> RemoveReport(int id)
+        {
+            var report = await _dbContext.Reports.Where(r => r.Id == id).SingleOrDefaultAsync();
+
+            _dbContext.Reports.Remove(report);
+            await _dbContext.SaveChangesAsync();
+
+            TempMessage = "Report ignored";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
 
         private Task<ApplicationUser> GetCurrentUserAsync()
         {

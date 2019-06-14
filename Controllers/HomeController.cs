@@ -23,6 +23,8 @@ namespace SmallTalks.Controllers
      * Report functionality
      * Make login check if user is banned(notes in notepad)
      * 
+     * 
+     * Validate banning date, cant be earlier than today
      * Front end
      * Login/Reigstration Views
      * (optional) make a detail View for a user, post
@@ -87,7 +89,7 @@ namespace SmallTalks.Controllers
 
             var posts = await GetPosts(2, tags, postsCount);
 
-            await _dbContext.Tags.ToListAsync(); // Fills up Tags in the Posts
+            await _dbContext.Tags.LoadAsync(); // Fills up Tags in the Posts
 
             var model = new PostsWithTags { Posts = posts, Tags = tags };
 
