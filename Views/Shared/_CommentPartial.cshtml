@@ -37,7 +37,7 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <input asp-for="Id" type="hidden" name="CommentId" />
                     <input asp-for="PostId" type="hidden" />
-                    <textarea class="add-comment__textarea form-control" id="child-comment-textarea-@Model.Id" name="Content" placeholder="Your comment" required maxlength="2000"></textarea>
+                    <textarea class="add-comment__textarea form-control" id="child-comment-textarea-@Model.Id" name="Content" placeholder="Your comment" required maxlength="300"></textarea>
                     <input type="submit" class="btn btn-main mt-1" value="Add" />
                 </form>
             </div>

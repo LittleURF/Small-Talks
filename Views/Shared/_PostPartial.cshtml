@@ -33,7 +33,7 @@
                     <form asp-action="AddComment" data-ajax="true" data-ajax-success="commentAdded" data-ajax-method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <input asp-for="Id" type="hidden" name="PostId" />
-                        <textarea class="add-comment__textarea form-control" id="comment-textarea-@Model.Id" name="Content" placeholder="Your comment" required maxlength="2000"></textarea>
+                        <textarea class="add-comment__textarea form-control" id="comment-textarea-@Model.Id" name="Content" placeholder="Your comment" required maxlength="500"></textarea>
                         <input type="submit" class="btn mt-1" value="Add" />
                     </form>
                 </div>

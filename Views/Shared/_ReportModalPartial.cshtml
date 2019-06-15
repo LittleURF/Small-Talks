@@ -19,7 +19,7 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <input type="hidden" value="@Model.Id" name="objectId" />
                     <input type="hidden" value="@Model.ObjectType" name="objectType" />
-                    <textarea class="form-control" name="content" placeholder="..." required maxlength="1000"></textarea>
+                    <textarea class="form-control" name="content" placeholder="..." required maxlength="150"></textarea>
                     <div class="modal-footer">
                         <button type="button" class="btn" data-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-danger" value="Send Report" />

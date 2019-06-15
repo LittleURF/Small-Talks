@@ -21,16 +21,15 @@ using SmallTalks.ViewModels;
 namespace SmallTalks.Controllers
 {
     /*
+     * Gotta make the cut off text display after a click or something
      * Make login check if user is banned(notes in notepad)
      * 
      * Instrunctions tab
      * Front end
-     * fix mobile tags menu
      * Login/Reigstration Views
      * Add info that no more posts are available when scrolled to the end
      * 
      * (optional) make a detail View for a user, post
-     * (optional) Attach the Load more function to a scroll instead of button click
     */
     public class HomeController : Controller
     {
@@ -202,7 +201,7 @@ namespace SmallTalks.Controllers
                 return comment;
             }
 
-            return null;
+            throw new ArgumentException("The comment did not pass the required validation");
 
         }
 

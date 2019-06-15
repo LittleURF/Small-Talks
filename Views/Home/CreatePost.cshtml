@@ -11,11 +11,11 @@
         <form asp-action="CreatePost" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="Post.Title" placeholder="Title" class="form-control" />
+                <input asp-for="Post.Title" placeholder="Title" maxlength="80" class="form-control" />
                 <span asp-validation-for="Post.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <textarea asp-for="Post.Content" placeholder="Content - What do you wanna say?" class="create-post__textarea form-control"></textarea>
+                <textarea asp-for="Post.Content" placeholder="Content - What do you wanna say?" maxlength="600" class="create-post__textarea form-control"></textarea>
                 <span asp-validation-for="Post.Content" class="text-danger"></span>
             </div>
             <h4 class="text-center">Tags</h4>

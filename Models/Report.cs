@@ -22,6 +22,7 @@ namespace SmallTalks.Models
         [Required]
         public ObjectType ReportedObjectType { get; set; }
 
+        [StringLength(160, ErrorMessage = "Content length cannot be longer than 150 characters") ]
         public string Content { get; set; }
     }
 }

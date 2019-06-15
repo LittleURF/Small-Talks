@@ -41,7 +41,6 @@ h2, h3, h4, h5, h6 {
     /*background-image: linear-gradient(to bottom, #346dc2, #2c60ba, #2553b2, #2246a9, #21389f);*/
     background: linear-gradient(to top, #141e30, #243b55);
     text-align: center;
-
 }
 
 
@@ -70,9 +69,11 @@ p, .post__title {
     display: none;
 }
 
-.tags {
-    display: none !important;
+.tags-invisible-md {
+    display: flex !important;
 }
+
+
 
 .tag {
     height: 45px;
@@ -168,9 +169,6 @@ p, .post__title {
     left: 2%;
     color: #0083b0;
     font-weight: lighter;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .post__text, .comment__text {
@@ -187,7 +185,7 @@ p, .post__title {
 
 .post__tag {
     color: #0083b0;
-} 
+}
 
 .create-post__textarea {
     height: 260px;
@@ -245,7 +243,7 @@ p, .post__title {
 }
 
 .btn--short {
-    position:relative;
+    position: relative;
     bottom: 2px; /*temp*/
     min-width: 78px;
 }
@@ -261,9 +259,9 @@ p, .post__title {
 }
 
 
-.report-icon:hover {
-    color: #ff5e5e;
-}
+    .report-icon:hover {
+        color: #ff5e5e;
+    }
 
 .reported-object {
     border: 1px solid red;
@@ -271,46 +269,52 @@ p, .post__title {
 }
 
 .reported-object__preview {
-   background-color: #eee;
-   border-radius: 5px;
+    background-color: #eee;
+    border-radius: 5px;
 }
 
 .loading-gif {
     color: gray;
     font-size: 50px;
 }
+
 .ellipsis {
     position: relative;
 }
 
-.ellipsis:before {
-    content: '&nbsp;';
-    visibility: hidden;
-}
+    .ellipsis:before {
+        content: '&nbsp;';
+        visibility: hidden;
+    }
 
-.ellipsis span {
-    position: absolute;
-    left: 0;
-    right: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    .ellipsis span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
 
 @media only screen and (min-width: 768px) {
-    .tags__dropdown {
-        display: none !important;
-    }
 
     .tags {
         display: flex !important;
     }
-}
 
-
-@media only screen and (min-width: 992px) {
-    .header__logo {
-        display: initial;
+    .collapse.dont-collapse-sm {
+        display: block;
+        height: auto !important;
+        visibility: visible;
     }
-}
+
+    .tags-invisible-md {
+        display: none !important;
+    }
+
+    @media only screen and (min-width: 992px) {
+        .header__logo {
+            display: initial;
+        }
+    }

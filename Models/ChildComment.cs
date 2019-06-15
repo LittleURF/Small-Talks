@@ -20,6 +20,7 @@ namespace SmallTalks.Models
         public int CommentId { get; set; }
 
         [Required]
+        [StringLength(550, ErrorMessage = "Comment cannot be longer than 500 characters")]
         public string Content { get; set; }
 
         public DateTime CreationDate { get; set; }
