@@ -71,16 +71,21 @@
         <input type="submit" class="tags__btn btn btn-secondary m-auto" value="Update Tags" />
     </div>
 </form>
+
 <br />
-<section class="posts">
+<section class="posts mb-5">
     @{ foreach (var post in Model.Posts)
         {
             <partial name="_PostPartial" model="post" />
         }
     }
 </section>
-@* This buttons role is to pass the tags to the controller *@
-<form id="loadPostsButton" asp-action="GetTags" data-ajax="true" data-ajax-success="loadPosts" data-ajax-method="post">
+
+<div class="d-flex justify-content-center">
+    <span id="spinner" class="loading-gif" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
+</div>
+@* This form's role is to pass the tags to the controller, so it can render the right posts. Its submitted on scroll by Jquery. *@
+<form id="loadPostsButton" asp-action="GetTags" data-ajax="true" data-ajax-success="loadPosts" data-ajax-loading="#spinner"data-ajax-method="post">
     @for (int i = 0; i < Model.Tags.Count(); i++)
     {
         <input type="hidden" asp-for="Tags[i].Id" />
@@ -89,22 +94,37 @@
         <input type="hidden" asp-for="Tags[i].FaClasses" />
     }
 
-    <input type="submit" class="btn btn-primary mt-1" value="Load More" />
 </form>
 @section Scripts {
     <script>
-        loadPosts = function (postsInfoJson) {
+        loadPosts = function (tagsJson) {
             var div = $("<div></div>");
 
-            var tags = postsInfoJson
+            var tags = tagsJson;
             var postsCount = $('.post').length;
             div.load("/Home/GetMorePostsPartial", { tags, postsCount });
 
             div.slideUp();
 
             $(".posts").append(div);
-            div.slideDown(400);
+            div.slideDown(600);
         };
+
+        5
+
+        // if user is scrolled past a certain point, a function rendering posts is getting called, the delay is needed to avoid sending too many requests
+        var recentScroll = false;
+        $(window).on('scroll', function () {
+            if ( !recentScroll && $(window).scrollTop() >= $(document).height() - $(window).height() - 50) {
+                $('#loadPostsButton').trigger("submit");
+                recentScroll = true;
+                window.setTimeout(() => { recentScroll = false; }, 500)
+            }
+        });
+
+
+
+
 
         reportSent = function (reportedObject) {
             var modalId = `report-modal-${reportedObject.objectId}-${reportedObject.objectType}`;

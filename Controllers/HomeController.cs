@@ -6,11 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SmallTalks.Data;
 using SmallTalks.Enums;
 using SmallTalks.Models;
@@ -19,14 +21,14 @@ using SmallTalks.ViewModels;
 namespace SmallTalks.Controllers
 {
     /*
-     * Admin/Mod Views and functionality
-     * Report functionality
      * Make login check if user is banned(notes in notepad)
      * 
-     * 
-     * Validate banning date, cant be earlier than today
+     * Instrunctions tab
      * Front end
+     * fix mobile tags menu
      * Login/Reigstration Views
+     * Add info that no more posts are available when scrolled to the end
+     * 
      * (optional) make a detail View for a user, post
      * (optional) Attach the Load more function to a scroll instead of button click
     */
@@ -65,7 +67,7 @@ namespace SmallTalks.Controllers
         [HttpPost]
         [ActionName("Index")]
         [ValidateAntiForgeryToken]
-        public async  Task<IActionResult> IndexWithTags(List<Tag> tags)
+        public async Task<IActionResult> IndexWithTags(List<Tag> tags)
         {
             var selectedTags = FilterTags(tags);
 
@@ -81,19 +83,6 @@ namespace SmallTalks.Controllers
             var model = new PostsWithTags { Posts = posts, Tags = tags };
 
             return View(model);
-        }
-
-        public async Task<IActionResult> GetMorePostsPartial(List<Tag> tags, int postsCount)
-        {
-            var selectedTags = FilterTags(tags);
-
-            var posts = await GetPosts(2, tags, postsCount);
-
-            await _dbContext.Tags.LoadAsync(); // Fills up Tags in the Posts
-
-            var model = new PostsWithTags { Posts = posts, Tags = tags };
-
-            return PartialView("_RenderPostsPartial", model);
         }
 
 
@@ -166,13 +155,27 @@ namespace SmallTalks.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+
         [HttpPost]
         //This method exits only to pass data to the View rendering Ajax calls
         public object GetTags(List<Tag> tags)
         {
-            var dataJson = Json(tags);
-            return dataJson;
+            var tagsJson = Json(tags);
+            return tagsJson;
+        }
+
+
+        public async Task<IActionResult> GetMorePostsPartial(List<Tag> tags, int postsCount)
+        {
+            var selectedTags = FilterTags(tags);
+
+            var posts = await GetPosts(2, tags, postsCount);
+
+            await _dbContext.Tags.LoadAsync(); // Fills up Tags in the Posts
+
+            var model = new PostsWithTags { Posts = posts, Tags = tags };
+
+            return PartialView("_RenderPostsPartial", model);
         }
 
 
@@ -182,6 +185,7 @@ namespace SmallTalks.Controllers
         // This method serves only AJAX requests
         public async Task<Comment> AddComment(Comment model)
         {
+
             if (ModelState.IsValid)
             {
                 var comment = new Comment
@@ -264,33 +268,52 @@ namespace SmallTalks.Controllers
 
         private async Task<List<Post>> GetPosts(int amount, List<Tag> tags)
         {
-            var posts = await _dbContext.Posts
-                .Include(p => p.Creator)
-                .Include(p => p.PostTags)
-                .Include(p => p.Comments).ThenInclude(c => c.Creator)
-                .Include(p => p.Comments).ThenInclude(c => c.Comments)
-                .Where(c => c.PostTags.Any(pt => tags.Contains(pt.Tag)))
-                .OrderByDescending(p => p.CreationDate)
-                .Take(amount)
-                .ToListAsync();
 
-            await _dbContext.Tags.ToListAsync(); // Fills up Tags in the Posts
+
+            var unwantedTagsJson = JsonConvert.SerializeObject(tags);
+            var wantedTags = JsonConvert.DeserializeObject<List<Tag>>(unwantedTagsJson);
+
+            wantedTags.Where(t => t.IsActive == true);
+
+
+            var posts = await _dbContext.Posts
+               .Include(p => p.Creator)
+               .Include(p => p.PostTags)
+               .Include(p => p.Comments).ThenInclude(c => c.Creator)
+               .Include(p => p.Comments).ThenInclude(c => c.Comments)
+               .Where(p => p.PostTags.All(pt => wantedTags.Any(t => t == pt.Tag)))
+               .OrderByDescending(p => p.CreationDate)
+               .Take(amount)
+               .ToListAsync();
+
+            await _dbContext.Users
+                    .Where(u => posts.Any(p => p.Comments.Any(c => c.Comments.Any(cc => cc.CreatorId == u.Id))))
+                    .LoadAsync();
+
+            await _dbContext.Tags.LoadAsync(); // Fills up Tags in the Posts
 
             return posts;
         }
 
         private async Task<List<Post>> GetPosts(int amount, List<Tag> tags, int postsToSkip)
         {
+            var unwantedTagsJson = JsonConvert.SerializeObject(tags);
+            var wantedTags = JsonConvert.DeserializeObject<List<Tag>>(unwantedTagsJson).Where(t => t.IsActive == true).ToList();
+
             var posts = await _dbContext.Posts
                 .Include(p => p.Creator)
                 .Include(p => p.PostTags)
-                .Include(p => p.Comments)
-                .ThenInclude(p => p.Comments)
-                .Where(c => c.PostTags.Any(pt => tags.Contains(pt.Tag)))
+                .Include(p => p.Comments).ThenInclude(c => c.Creator)
+                .Include(p => p.Comments).ThenInclude(c => c.Comments)
+                .Where(p => p.PostTags.All(pt => wantedTags.Any(t => t == pt.Tag)))
                 .OrderByDescending(p => p.CreationDate)
                 .Skip(postsToSkip)
                 .Take(amount)
                 .ToListAsync();
+
+            await _dbContext.Users
+                    .Where(u => posts.Any(p => p.Comments.Any(c => c.Comments.Any(cc => cc.CreatorId == u.Id))))
+                    .LoadAsync();
 
             await _dbContext.Tags.ToListAsync(); // Fills up Tags in the Posts
 

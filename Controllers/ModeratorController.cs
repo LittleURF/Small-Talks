@@ -40,6 +40,11 @@ namespace SmallTalks.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BanUser(string userName, string description, DateTime endTime, int? reportId)
         {
+            if (endTime < DateTime.Today)
+            {
+                TempMessage = "Action failed. Ending date of the ban cannot be earlier than today";
+                return RedirectToAction(nameof(Index));
+            }
 
             var currentUser = await GetCurrentUserAsync();
             var bannedUser = await _userManager.FindByNameAsync(userName);

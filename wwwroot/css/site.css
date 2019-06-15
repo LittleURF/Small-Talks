@@ -275,7 +275,10 @@ p, .post__title {
    border-radius: 5px;
 }
 
-
+.loading-gif {
+    color: gray;
+    font-size: 50px;
+}
 .ellipsis {
     position: relative;
 }
