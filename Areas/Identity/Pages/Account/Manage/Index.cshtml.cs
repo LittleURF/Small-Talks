@@ -30,6 +30,8 @@ namespace SmallTalks.Areas.Identity.Pages.Account.Manage
 
         public string Username { get; set; }
 
+        public int Points { get; set; }
+
         public bool IsEmailConfirmed { get; set; }
 
         [TempData]
@@ -60,8 +62,9 @@ namespace SmallTalks.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            
             Username = userName;
+            Points = user.Points;
 
             Input = new InputModel
             {

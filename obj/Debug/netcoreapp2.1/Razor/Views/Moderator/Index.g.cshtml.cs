@@ -94,7 +94,7 @@ using System.Web;
             WriteLiteral("    ");
             EndContext();
             BeginContext(116, 82, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "10b875411fba418da136b6312f089784", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "21b41f990abe49d1b530385bfce5fe3b", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -203,7 +203,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = TempData["TempMes
             WriteLiteral("</td>\r\n                        <td>");
             EndContext();
             BeginContext(1357, 107, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d20e9d4b9d3648ad99b3e9a681d8f514", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ba3f948ada4456e8a67158dd45dd13b", async() => {
                 BeginContext(1413, 47, true);
                 WriteLiteral("<i class=\"fas fa-external-link-square-alt\"></i>");
                 EndContext();
@@ -246,12 +246,12 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = TempData["TempMes
             WriteLiteral("            </table>\r\n            </div>\r\n    </section>\r\n    <section class=\"bans-section col-md-8 col-lg-3 mr-auto ml-auto mt-5\">\r\n        <h4>User History</h4>\r\n        <div class=\"row\">\r\n            ");
             EndContext();
             BeginContext(1720, 467, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dac74cf4f3d347e9b443f3156b5730cf", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "87c33c76fecd4a04b60fec04c51fdf57", async() => {
                 BeginContext(1777, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(1795, 66, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3a2c54a0aba6472e9011e9f1cf192a7a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9eb115e9769d4ab9936a2d85a60f3b37", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -300,12 +300,12 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
             WriteLiteral("\r\n        </div>\r\n\r\n        <h3>Ban user</h3>\r\n        <div class=\"row\">\r\n            ");
             EndContext();
             BeginContext(2273, 771, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a0bb7aaa1b24b2e82ca6c81c74019a9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0bb508319fe145b499516c21980b0153", async() => {
                 BeginContext(2320, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(2338, 66, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bae261c506b146bca322e50c565c177c", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6ad62ac304e948cdb168dfbbabbfd852", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -356,12 +356,12 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
             WriteLiteral("\r\n        </div>\r\n\r\n        <h3>Unban user</h3>\r\n        <div class=\"row\">\r\n            ");
             EndContext();
             BeginContext(3132, 474, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ce3419207844438a98c67c0d3270408", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8ec66929f64e4aef8e07562cc67a7d3a", async() => {
                 BeginContext(3181, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(3199, 66, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17a93ad313474a05aeb70c7b9c940346", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "734ffe455c834ec496b53781d568e2e6", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();

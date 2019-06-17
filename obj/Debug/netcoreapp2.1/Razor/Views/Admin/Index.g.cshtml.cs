@@ -95,7 +95,7 @@ using System.Web;
             WriteLiteral("    ");
             EndContext();
             BeginContext(127, 82, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "8d2aaf753cb14744b7c7bc920f646583", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1f74f0cf0ff6438694c1243d0e7456a4", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -128,12 +128,12 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = TempData["TempMes
             WriteLiteral("<br />\r\n<br />\r\n<br />\r\n\r\n<p>\r\n    <section class=\"moderators col-md-6 m-auto\">\r\n        <h3>Promote user to moderator</h3>\r\n        <div class=\"row\">\r\n            ");
             EndContext();
             BeginContext(378, 454, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e946e6f0fb1c441ebc735bd3de558186", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "853fd54f1924424f8c7de9f034f2edf6", async() => {
                 BeginContext(424, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(442, 66, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f6009dd1109d47ceade97b47fa58899b", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "16fdd1fbd5ae446b8c5952028e901fe7", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -202,7 +202,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSumma
             WriteLiteral("</td>\r\n                        <td>");
             EndContext();
             BeginContext(1208, 110, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "87a1cadc96a44eea8be39518ae382356", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72f9c79c7e084d8083d3bc0515935936", async() => {
                 BeginContext(1281, 33, true);
                 WriteLiteral("<i class=\"fas fa-user-minus\"></i>");
                 EndContext();

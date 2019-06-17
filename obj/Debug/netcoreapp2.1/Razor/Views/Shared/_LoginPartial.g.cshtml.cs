@@ -103,12 +103,12 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("    ");
             EndContext();
             BeginContext(251, 607, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "baba7a5a28ab4aca96aaad87e3d6cb89", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "88657e9d3724491888944395dc4e3030", async() => {
                 BeginContext(425, 105, true);
                 WriteLiteral("\r\n        <ul class=\"nav navbar-nav navbar-right align-items-center\">\r\n            <li>\r\n                ");
                 EndContext();
                 BeginContext(530, 140, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "48c1f247e3d24bd8a92a47aa504c3a47", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "105164e4c6d443feaced152ebb74f0bb", async() => {
                     BeginContext(630, 13, false);
 #line 13 "C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\Views\Shared\_LoginPartial.cshtml"
                                                                                                               Write(user.UserName);
@@ -199,7 +199,7 @@ else
             WriteLiteral("    <ul class=\"nav navbar-right\">\r\n            <li>");
             EndContext();
             BeginContext(923, 90, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "63fb222bb007452a91389eea9c0a9728", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b4526e3ec3c64da3a6fefa49a096965d", async() => {
                 BeginContext(1001, 8, true);
                 WriteLiteral("Register");
                 EndContext();
@@ -224,7 +224,7 @@ else
             WriteLiteral("</li>\r\n            <li>");
             EndContext();
             BeginContext(1036, 86, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a19267e12ae24f1aa3738bd4f99715a8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c60c8f1f91184c7ba11c77745abba3c6", async() => {
                 BeginContext(1113, 5, true);
                 WriteLiteral("Login");
                 EndContext();
