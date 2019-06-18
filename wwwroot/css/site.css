@@ -124,7 +124,7 @@ p, .post__title {
     transition: .5s;
 }
 
-tag input:checked:before {
+.tag input:checked:before {
     left: 20px;
 }
 
@@ -291,6 +291,13 @@ tag input:checked:before {
     width: 85%;
 }
 
+.instructions__content {
+    border: 1px solid #d7d7d7;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .instructions__text {
     font-size: 110%;
     margin: 15px auto;
@@ -412,7 +419,7 @@ tag input:checked:before {
     }
 
     .post__text, .comment__text {
-        width: calc(95%);
+        max-width: calc(95%);
         font-size: 17px;
     }
 

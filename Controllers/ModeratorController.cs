@@ -16,9 +16,9 @@ namespace SmallTalks.Controllers
     public class ModeratorController : Controller
     {
 
-        private ApplicationDbContext _dbContext;
-        private UserManager<ApplicationUser> _userManager;
-        private RoleManager<ApplicationRole> _roleManager;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
         [TempData]
         public string TempMessage { get; set; }
@@ -186,9 +186,6 @@ namespace SmallTalks.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
-
 
 
         private Task<ApplicationUser> GetCurrentUserAsync()

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SmallTalks.Models;
+using Microsoft.EntityFrameworkCore;
+using SmallTalks.Data;
 
 namespace SmallTalks.Areas.Identity.Pages.Account
 {
@@ -17,14 +19,16 @@ namespace SmallTalks.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _dbContext;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
 
         [BindProperty]
@@ -86,6 +90,13 @@ namespace SmallTalks.Areas.Identity.Pages.Account
                 }
 
 
+                if(await IsBannedAsync(user))
+                {
+                    var ban = await _dbContext.Bans.Where(r => r.Id == user.CurrentBanId).SingleOrDefaultAsync();
+                    ModelState.AddModelError(string.Empty, $"Your account is banned until {ban.EndTime.ToShortDateString()}.");
+                    return Page();
+                }
+
                 var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
@@ -115,6 +126,28 @@ namespace SmallTalks.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task<bool> IsBannedAsync(ApplicationUser user )
+        {
+            var isUserBanned = false;
+
+            if (user.AccountLocked == true)
+            {
+                var ban = await _dbContext.Bans.Where(r => r.Id == user.CurrentBanId).SingleOrDefaultAsync();
+
+                if(ban.EndTime.ToUniversalTime() < DateTime.UtcNow)
+                {
+                    user.AccountLocked = false;
+                    user.CurrentBanId = null;
+                    isUserBanned = false;
+                }
+                else
+                {
+                    isUserBanned = true;
+                }
+            }
+            return isUserBanned;
         }
     }
 }

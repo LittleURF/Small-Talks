@@ -20,10 +20,7 @@ using SmallTalks.ViewModels;
 
 namespace SmallTalks.Controllers
 {
-    /*
-     * Make more dummy data, with microsoft documentation
-     * Make login check if user is banned(notes in notepad)
-     * 
+    /* 
      * Add some relatively positioned ornaments
      * 
     */
@@ -76,7 +73,6 @@ namespace SmallTalks.Controllers
             var posts = await GetPosts(5, selectedTags);
 
             var model = new PostsWithTags { Posts = posts, Tags = tags };
-
             return View(model);
         }
 

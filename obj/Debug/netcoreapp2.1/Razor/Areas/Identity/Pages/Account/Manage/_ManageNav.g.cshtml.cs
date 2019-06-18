@@ -80,7 +80,7 @@ using SmallTalks.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("<nav class=\"nav manage-nav\"  >\r\n    ");
             EndContext();
             BeginContext(195, 58, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "46037f37a5914ae482a1ef75aa806dc2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c63337b2104f46b2a1eb2ec9649c3808", async() => {
                 BeginContext(242, 7, true);
                 WriteLiteral("Profile");
                 EndContext();
@@ -103,7 +103,7 @@ using SmallTalks.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(259, 89, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3d8c0803360d41f29a286e932474e8b1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4c370467b71d40a9822d115830a961b2", async() => {
                 BeginContext(336, 8, true);
                 WriteLiteral("Password");
                 EndContext();
