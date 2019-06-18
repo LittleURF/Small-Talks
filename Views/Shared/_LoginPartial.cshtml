@@ -10,7 +10,7 @@
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right align-items-center">
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="nav-link text-white" title="Manage">@user.UserName - @user.Points points </a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="nav-link text-white" title="Manage">@user.Points points </a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link nav-btn nav-link text-white">Logout</button>

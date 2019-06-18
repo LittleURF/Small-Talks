@@ -5,25 +5,29 @@
 
 <h1 class="text-center mt-5 mb-5">@Model[0].User.UserName Ban History</h1>
 <div class="row">
-    <table class="table table-light table-striped col-md-12 col-lg-9 m-auto">
-        <thead style="font-family: 'Segoe UI light', Tahoma, Geneva, Verdana, sans-serif">
-            <tr>
-                <th>Ban Id</th>
-                <th>Description</th>
-                <th>Start - End</th>
-                <th>Banned by</th>
-            </tr>
-        </thead>
-        @foreach (var ban in Model)
-        {
-            <tr>
-                <td>@ban.Id</td>
-                <td>@ban.Description</td>
-                <td>@ban.StartTime.ToString("dd/MM/yyyy") - @ban.EndTime.ToString("dd/MM/yyyy")</td>
-                <td>@ban.BannedBy.UserName</td>
+    <div class="col-md-12 col-lg-9 m-auto">
+        <div class="table-responsive-md">
+            <table class="table table-light table-striped m-auto" style="min-width: 500px;">
+                <thead style="font-family: 'Segoe UI light', Tahoma, Geneva, Verdana, sans-serif">
+                    <tr>
+                        <th>Ban Id</th>
+                        <th>Description</th>
+                        <th>Start - End</th>
+                        <th>Banned by</th>
+                    </tr>
+                </thead>
+                @foreach (var ban in Model)
+                {
+                    <tr>
+                        <td>@ban.Id</td>
+                        <td>@ban.Description</td>
+                        <td>@ban.StartTime.ToString("dd/MM/yyyy") - @ban.EndTime.ToString("dd/MM/yyyy")</td>
+                        <td>@ban.BannedBy.UserName</td>
 
-            </tr>
-        }
-    </table>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
 </div>
 

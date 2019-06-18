@@ -21,11 +21,10 @@ using SmallTalks.ViewModels;
 namespace SmallTalks.Controllers
 {
     /*
+     * Make more dummy data, with microsoft documentation
      * Make login check if user is banned(notes in notepad)
      * 
      * Add some relatively positioned ornaments
-     * Front end
-     * Add info that no more posts are available when scrolled to the end
      * 
     */
     public class HomeController : Controller

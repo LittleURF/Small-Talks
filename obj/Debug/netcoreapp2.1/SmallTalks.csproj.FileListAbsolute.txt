@@ -35,10 +35,8 @@ C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\ForgotPasswordConfirmation.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Lockout.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Login.g.cshtml.cs
-C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\LoginWithRecoveryCode.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Logout.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Manage\ChangePassword.g.cshtml.cs
-C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Manage\Index.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Manage\SetPassword.g.cshtml.cs
 C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Manage\_Layout.g.cshtml.cs

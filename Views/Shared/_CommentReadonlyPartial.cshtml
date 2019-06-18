@@ -2,7 +2,7 @@
 
 <div class="row d-flex justify-content-center">
     <div class="comment">
-        <div class="comment__data d-flex justify-content-between p-1 w-75 m-auto">
+        <div class="comment__data d-flex justify-content-between p-1 m-auto">
             <!--  The expression of getting Sex is basically - getting the name of defined as int Sex enum. then displaying only first letter of the name, so F or M -->
             <p class="m-0">@Model.Creator.UserName @Model.Creator.GetAge() @Enum.GetName(typeof(Sex), Model.Creator.Sex)[0]</p>
             <p class="m-0" style=" word-spacing: 12px;">@Model.CreationDate.ToString("H:mm dd/MM/yyyy")</p>

@@ -38,9 +38,9 @@
             </div>
     </section>
     <section class="bans-section col-md-8 col-lg-3 mr-auto ml-auto mt-5">
-        <h4>User History</h4>
+        <h4 class="text-center">User History</h4>
         <div class="row">
-            <form asp-action="GetUserBanHistory" class="form--small">
+            <form asp-action="GetUserBanHistory" class="w-100">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group text-center">
                     <input class="form-control d-inline-block" type="text" name="userName" placeholder="Username" required />
@@ -49,9 +49,9 @@
             </form>
         </div>
 
-        <h3>Ban user</h3>
+        <h4 class="text-center">Ban user</h4>
         <div class="row">
-            <form asp-action="BanUser" class="form--small">
+            <form asp-action="BanUser" class="w-100">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group text-center ">
                     <input class= form-control mr-2" type="text" name="userName" placeholder="Username" aria-label="Username" required />
@@ -62,9 +62,9 @@
             </form>
         </div>
 
-        <h3>Unban user</h3>
+        <h4 class="text-center">Unban user</h4>
         <div class="row">
-            <form asp-action="UnbanUser" class="form--small">
+            <form asp-action="UnbanUser" class="w-100">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group text-center">
                     <input class=" form-control d-inline-block" type="text" name="userName" placeholder="Username" required />

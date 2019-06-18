@@ -8,7 +8,7 @@
 <header class="home__header-main full-width row text-white">
     <div class="header__content d-flex justify-content-center align-items-start w-100 mb-5 mt-4">
         <div class="header__text">
-            <h1 class="display-1 text-white text-center">Small Talks</h1>
+            <h1 class="header__name display-1 text-white text-center">Small Talks</h1>
             <p style="font-size: 150%; font-family: 'Segoe UI', Tahoma;">A place to talk about anything and everything!</p>
             <br />
             <div class="d-flex justify-content-center w-100 mb-4">
@@ -31,7 +31,7 @@
 <br />
 
 <div class="tags-invisible-md d-flex justify-content-center">
-    <a class="btn btn-dark dropdown-toggle " style="width: 250px; " href="#tags-index" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="tags-index">
+    <a class="btn btn-dark btn-lg dropdown-toggle " style="width: 100px; " href="#tags-index" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="tags-index">
         Tags
     </a>
 </div>
@@ -55,18 +55,21 @@
 
     </div>
     <div class="text-center">
-        <input type="submit" class="tags__btn btn btn-secondary m-auto" value="Update Tags" />
+        <input type="submit" class="tags__btn btn btn-secondary m-auto" value="Update" />
     </div>
 </form>
 
 <br />
-<section class="posts mb-5">
-    @{ foreach (var post in Model.Posts)
-        {
-            <partial name="_PostPartial" model="post" />
+<div class="row d-flex justify-content-center">
+    <section class="posts mb-5">
+        @{ foreach (var post in Model.Posts)
+            {
+                <partial name="_PostPartial" model="post" />
+            }
         }
-    }
-</section>
+    </section>
+</div>
+
 
 <div class="d-flex justify-content-center">
     <span id="spinner" class="loading-gif" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
