@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbzjFN6YqlU2ub8zuaNk1KwAAAAACAAAAAAAQZgAAAAEAACAAAAAWWdA/om/Vrk7Glemf2BsSnvYnrHTLRhOnnfrQTzqPkgAAAAAOgAAAAAIAACAAAAAuHfO15KgvsYDtaTZ4twoHsCk+dHb11C2ERg7Iat/5g4AAAACcXJpqEduzwK7nQ6OlYgq7bX+OBBGjoBRwUxZC1dUb41gjeop4Vs4hkysPpafGl8cGhWazV/nVrEKR97RiBY7+KTq7e5LiFrQUSxguS9uF3O3s3+bZP+qraGgIASd7EtJeApQS53f8I3sJCnR/nzLs8sPWB103CG173u9o/0MXS0AAAABDbbZxs/SpcHZsvND3rTVOAVgi6PShHJ9fj+uhbykWmuoFmMh63QWuzvcjNasmA2FAOeioHCW3lXLjBkmiXbUd</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:small-talksdbserver.database.windows.net,1433%3bInitial Catalog=Small-Talks_db%3bUser Id=SmallTalksAdmin%40small-talksdbserver%3bPassword=W4rszaw%40</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="SmallTalks.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:small-talksdbserver.database.windows.net,1433%3bInitial Catalog=Small-Talks_db%3bUser Id=SmallTalksAdmin%40small-talksdbserver%3bPassword=W4rszaw%40</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

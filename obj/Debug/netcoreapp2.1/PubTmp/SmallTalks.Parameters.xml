@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Small-Talks" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Hubert\\source\\repos\\SmallTalks\\SmallTalks\\obj\\Debug\\netcoreapp2\.1\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="SmallTalks.Data.ApplicationDbContext" description="" value="Data Source=tcp:small-talksdbserver.database.windows.net,1433;Initial Catalog=Small-Talks_db;User Id=SmallTalksAdmin@small-talksdbserver;Password=W4rszaw@" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\Hubert\\source\\repos\\SmallTalks\\SmallTalks\\obj\\Debug\\netcoreapp2\.1\\PubTmp\\EFSQLScripts\\SmallTalks\.Data\.ApplicationDbContext\.sql$" />
+  </parameter>
+</parameters>

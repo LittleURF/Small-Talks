@@ -44,8 +44,8 @@ namespace SmallTalks
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                googleOptions.ClientId = Configuration["AuthenticationGoogleClientId"];
+                googleOptions.ClientSecret = Configuration["AuthenticationGoogleClientSecret"];
             });
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
@@ -87,6 +87,8 @@ namespace SmallTalks
                 app.UseHsts();
             }
 
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -100,7 +102,7 @@ namespace SmallTalks
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //DummyData.Initialize(context, userManager, roleManager).Wait();
+            DummyData.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }

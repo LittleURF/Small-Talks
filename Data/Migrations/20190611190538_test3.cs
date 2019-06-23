@@ -6,37 +6,37 @@ namespace SmallTalks.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_AspNetUsers_CurrentBanId",
-                table: "AspNetUsers");
+            //migrationBuilder.DropIndex(
+            //    name: "IX_AspNetUsers_CurrentBanId",
+            //    table: "AspNetUsers");
 
-            migrationBuilder.AddColumn<string>(
-                name: "BannedById",
-                table: "Bans",
-                nullable: true);
+            //migrationBuilder.AddColumn<string>(
+            //    name: "BannedById",
+            //    table: "Bans",
+            //    nullable: true);
 
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_CurrentBanId",
-                table: "AspNetUsers",
-                column: "CurrentBanId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_AspNetUsers_CurrentBanId",
+            //    table: "AspNetUsers",
+            //    column: "CurrentBanId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_AspNetUsers_CurrentBanId",
-                table: "AspNetUsers");
+            //migrationBuilder.DropIndex(
+            //    name: "IX_AspNetUsers_CurrentBanId",
+            //    table: "AspNetUsers");
 
-            migrationBuilder.DropColumn(
-                name: "BannedById",
-                table: "Bans");
+            //migrationBuilder.DropColumn(
+            //    name: "BannedById",
+            //    table: "Bans");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_CurrentBanId",
-                table: "AspNetUsers",
-                column: "CurrentBanId",
-                unique: true,
-                filter: "[CurrentBanId] IS NOT NULL");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_AspNetUsers_CurrentBanId",
+            //    table: "AspNetUsers",
+            //    column: "CurrentBanId",
+            //    unique: true,
+            //    filter: "[CurrentBanId] IS NOT NULL");
         }
     }
 }

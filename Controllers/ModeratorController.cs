@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using SmallTalks.ViewModels;
 
 namespace SmallTalks.Controllers
 {
+    [Authorize(Roles = "Moderator, Admin")]
     public class ModeratorController : Controller
     {
 
@@ -30,6 +32,7 @@ namespace SmallTalks.Controllers
             _roleManager = roleManager;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var reports = await _dbContext.Reports.Include(r => r.Reporter).ToListAsync();
@@ -126,6 +129,7 @@ namespace SmallTalks.Controllers
             return View(banHistory);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> ReportDetails(int id)
         {
             var model = new ReportDetailsViewModel();

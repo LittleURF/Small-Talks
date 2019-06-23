@@ -13,11 +13,8 @@
 
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link href="~/css/FontAwesome/all.css" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     </environment>
@@ -36,14 +33,8 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Instructions" asp-action="Index">Instructions</a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">Account</a></li>
-                    @if (User.IsInAnyRole("Member", "Moderator", "Admin"))
-                    {
-                        <li class="nav-item"><a class="nav-link " asp-controller="Moderator" asp-action="Index">Moderator</a></li>
-                    }
-                    @if (User.IsInAnyRole("Member", "Admin"))
-                    {
-                        <li class="nav-item"><a class="nav-link " asp-controller="Admin" asp-action="Index">Admin</a></li>
-                    }
+                    <li class="nav-item"><a class="nav-link " asp-controller="Moderator" asp-action="Index">Moderator</a></li>
+                    <li class="nav-item"><a class="nav-link " asp-controller="Admin" asp-action="Index">Admin</a></li>
                 </ul>
 
             </div>
@@ -51,7 +42,6 @@
         </div>
     </nav>
 
-    <partial name="_CookieConsentPartial" />
     <div class="container body-content">
         @RenderBody()
 
@@ -65,9 +55,8 @@
         <script src="~/lib//jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
         <script src="~/lib/jquery-unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
-
-
     </environment>
+
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
@@ -76,19 +65,11 @@
                 integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-        </script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.min.js" asp-append-version=true></script>
         <script src="~/lib//jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-
         <script src="~/lib/jquery-unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
-
-
     </environment>
 
     @RenderSection("Scripts", required: false)

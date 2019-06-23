@@ -11,7 +11,7 @@ using SmallTalks.Models;
 
 namespace SmallTalks.Controllers
 {
-    [Authorize(Roles = "Member, Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private ApplicationDbContext _dbContext;
@@ -28,6 +28,7 @@ namespace SmallTalks.Controllers
             _roleManager = roleManager;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var moderatorRoleId = _roleManager.FindByNameAsync("Moderator").Result.Id;

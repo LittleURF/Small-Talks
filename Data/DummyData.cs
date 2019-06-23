@@ -45,6 +45,7 @@ namespace SmallTalks.Data
                     Email = "hubertzachlowski@gmail.com",
                     BirthDate = new DateTime(1998, 07, 25),
                     Sex = Sex.Male,
+                    EmailConfirmed = true,
                     Points = 999999
                 };
 
@@ -66,6 +67,7 @@ namespace SmallTalks.Data
                     Email = "hubertzachlo@o2.pl",
                     BirthDate = new DateTime(2005, 11, 04),
                     Sex = Sex.Female,
+                    EmailConfirmed = true,
                     Points = 200
                 };
 
