@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <IisApp path="C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Release\netcoreapp2.1\PubTmp\Out\" />
-  <dbfullsql path="C:\Users\Hubert\source\repos\SmallTalks\SmallTalks\obj\Release\netcoreapp2.1\PubTmp\EFSQLScripts\SmallTalks.Data.ApplicationDbContext.sql" />
-</sitemanifest>
